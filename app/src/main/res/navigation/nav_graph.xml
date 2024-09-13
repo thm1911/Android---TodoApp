@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/stepFragment"
-        android:name="com.example.todoapp.Fragment.StepFragment"
+        android:name="com.example.todoapp.UI.Onboarding.StepFragment"
         android:label="fragment_step"
         tools:layout="@layout/fragment_step" >
         <action
@@ -16,7 +16,49 @@
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"
-        android:name="com.example.todoapp.Fragment.CreateAccountFragment"
+        android:name="com.example.todoapp.UI.Onboarding.CreateAccountFragment"
         android:label="fragment_create_account"
-        tools:layout="@layout/fragment_create_account" />
+        tools:layout="@layout/fragment_create_account" >
+        <action
+            android:id="@+id/action_createAccountFragment_to_emailSignUpFragment"
+            app:destination="@id/emailSignUpFragment" />
+        <action
+            android:id="@+id/action_createAccountFragment_to_userSignInFragment"
+            app:destination="@id/userSignInFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/emailSignUpFragment"
+        android:name="com.example.todoapp.UI.SignUp.Email.EmailSignUpFragment"
+        android:label="fragment_email_sign_up"
+        tools:layout="@layout/fragment_email_sign_up" >
+        <action
+            android:id="@+id/action_emailSignUpFragment_to_userSignUpFragment"
+            app:destination="@id/userSignUpFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/userSignUpFragment"
+        android:name="com.example.todoapp.UI.SignUp.User.UserSignUpFragment"
+        android:label="fragment_user_sign_up"
+        tools:layout="@layout/fragment_user_sign_up" >
+        <action
+            android:id="@+id/action_userSignUpFragment_to_homepageChooseThemeFragment2"
+            app:destination="@id/homepageChooseThemeFragment" />
+        <argument
+            android:name="email"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/homepageChooseThemeFragment"
+        android:name="com.example.todoapp.UI.HomepageChooseThemeFragment"
+        android:label="fragment_homepage_choose_theme"
+        tools:layout="@layout/fragment_homepage_choose_theme" />
+    <fragment
+        android:id="@+id/userSignInFragment"
+        android:name="com.example.todoapp.UI.SignIn.UserSignInFragment"
+        android:label="fragment_user_sign_in"
+        tools:layout="@layout/fragment_user_sign_in" >
+        <action
+            android:id="@+id/action_userSignInFragment_to_homepageChooseThemeFragment"
+            app:destination="@id/homepageChooseThemeFragment" />
+    </fragment>
 </navigation>

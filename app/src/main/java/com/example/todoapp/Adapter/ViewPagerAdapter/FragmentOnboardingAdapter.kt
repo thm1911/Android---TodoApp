@@ -4,9 +4,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Lifecycle
 import androidx.viewpager2.adapter.FragmentStateAdapter
-import com.example.todoapp.Fragment.Onboarding1Fragment
-import com.example.todoapp.Fragment.Onboarding2Fragment
-import com.example.todoapp.Fragment.Onboarding3Fragment
+import com.example.todoapp.UI.Onboarding.Onboarding1Fragment
+import com.example.todoapp.UI.Onboarding.Onboarding2Fragment
+import com.example.todoapp.UI.Onboarding.Onboarding3Fragment
 
 class FragmentOnboardingAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {

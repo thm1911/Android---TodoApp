@@ -1,22 +1,21 @@
-package com.example.todoapp.Fragment
+package com.example.todoapp.UI
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import com.example.todoapp.R
-import com.example.todoapp.databinding.FragmentCreateAccountBinding
+import com.example.todoapp.databinding.FragmentHomepageChooseThemeBinding
 
-class CreateAccountFragment : Fragment() {
-    private var _binding: FragmentCreateAccountBinding? = null
+class HomepageChooseThemeFragment : Fragment() {
+    private var _binding: FragmentHomepageChooseThemeBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCreateAccountBinding.inflate(layoutInflater, container, false)
+        _binding = FragmentHomepageChooseThemeBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
 
@@ -24,4 +23,5 @@ class CreateAccountFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+
 }
