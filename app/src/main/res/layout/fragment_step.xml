@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Fragment.StepFragment">
+    tools:context=".UI.Onboarding.StepFragment">
 
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/viewPager"
@@ -39,16 +39,16 @@
         android:id="@+id/continue_button"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:text="@string/Continue"
         android:background="@drawable/button"
+        android:text="@string/Continue"
         android:textAllCaps="false"
-        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHeight_percent="0.06"
-        app:layout_constraintWidth_percent="0.85"
-        app:layout_constraintVertical_bias="0.83"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.83"
+        app:layout_constraintWidth_percent="0.85" />
 
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tabLayout"

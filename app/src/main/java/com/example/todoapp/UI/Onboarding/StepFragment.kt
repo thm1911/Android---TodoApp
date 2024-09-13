@@ -1,4 +1,4 @@
-package com.example.todoapp.Fragment
+package com.example.todoapp.UI.Onboarding
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
-import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.todoapp.Adapter.ViewPagerAdapter.FragmentOnboardingAdapter
 import com.example.todoapp.databinding.FragmentStepBinding
 import com.google.android.material.tabs.TabLayoutMediator

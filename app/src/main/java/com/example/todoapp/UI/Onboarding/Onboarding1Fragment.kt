@@ -1,4 +1,4 @@
-package com.example.todoapp.Fragment
+package com.example.todoapp.UI.Onboarding
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
