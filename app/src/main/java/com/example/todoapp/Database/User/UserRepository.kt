@@ -19,4 +19,6 @@ class UserRepository(context: Context) {
         val check = userDAO.checkUser(username, password)
         return check > 0
     }
+    suspend fun setTheme(username: String, theme: Int) = userDAO.setTheme(username, theme)
+    suspend fun getTheme(id: Int) = userDAO.getTheme(id)
 }

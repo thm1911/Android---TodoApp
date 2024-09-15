@@ -45,11 +45,12 @@ class UserSignUpFragment : Fragment() {
                             0,
                             email,
                             binding.username.text.toString(),
-                            binding.password.text.toString()
+                            binding.password.text.toString(),
+                            0
                         )
                     )
                     findNavController().navigate(
-                        UserSignUpFragmentDirections.actionUserSignUpFragmentToHomepageChooseThemeFragment2(),
+                        UserSignUpFragmentDirections.actionUserSignUpFragmentToHomepageChooseThemeFragment2(binding.username.text.toString()),
                         navOptions
                     )
                 }

@@ -23,4 +23,9 @@ interface UserDAO {
     @Query("SELECT COUNT(*)FROM User WHERE username = :username AND password = :password")
     suspend fun checkUser(username: String, password: String): Int
 
+    @Query("UPDATE User SET themeTask = :theme WHERE username = :username")
+    suspend fun setTheme(username: String, theme: Int)
+
+    @Query("SELECT themeTask FROM User WHERE id = :id")
+    suspend fun getTheme(id: Int): Int
 }

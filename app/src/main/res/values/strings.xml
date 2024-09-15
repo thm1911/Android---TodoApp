@@ -29,5 +29,7 @@
     <string name="welcome_back">Welcome Back!</string>
     <string name="your_work_faster_and_structured_with_noteapp">Your work faster and structured with Noteapp</string>
     <string name="forgot_password"><u>Forgot password?</u></string>
+    <string name="open_noteapp">Open Noteapp</string>
+    <string name="no_theme_has_been_selected">No theme has been selected</string>
 
 </resources>
