@@ -49,9 +49,16 @@
     </fragment>
     <fragment
         android:id="@+id/homepageChooseThemeFragment"
-        android:name="com.example.todoapp.UI.HomepageChooseThemeFragment"
+        android:name="com.example.todoapp.UI.MainApp.ChooseTheme.HomepageChooseThemeFragment"
         android:label="fragment_homepage_choose_theme"
-        tools:layout="@layout/fragment_homepage_choose_theme" />
+        tools:layout="@layout/fragment_homepage_choose_theme" >
+        <action
+            android:id="@+id/action_homepageChooseThemeFragment_to_mainAppFragment"
+            app:destination="@id/mainAppFragment" />
+        <argument
+            android:name="username"
+            app:argType="string" />
+    </fragment>
     <fragment
         android:id="@+id/userSignInFragment"
         android:name="com.example.todoapp.UI.SignIn.UserSignInFragment"
@@ -60,5 +67,14 @@
         <action
             android:id="@+id/action_userSignInFragment_to_homepageChooseThemeFragment"
             app:destination="@id/homepageChooseThemeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/mainAppFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.MainAppFragment"
+        android:label="fragment_main_app"
+        tools:layout="@layout/fragment_main_app" >
+        <argument
+            android:name="theme"
+            app:argType="integer" />
     </fragment>
 </navigation>

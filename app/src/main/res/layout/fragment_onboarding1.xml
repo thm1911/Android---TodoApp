@@ -23,7 +23,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:autoSizeMaxTextSize="40sp"
-        android:autoSizeMinTextSize="30sp"
+        android:autoSizeMinTextSize="20sp"
         android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="@string/noteapp"

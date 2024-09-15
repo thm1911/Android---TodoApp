@@ -35,7 +35,7 @@ class UserSignInFragment : Fragment() {
         binding.signIn.setOnClickListener {
             check { res ->
                 if (res) findNavController().navigate(
-                    UserSignInFragmentDirections.actionUserSignInFragmentToHomepageChooseThemeFragment(),
+                    UserSignInFragmentDirections.actionUserSignInFragmentToHomepageChooseThemeFragment(binding.username.text.toString()),
                     navOptions
                 )
             }
@@ -48,6 +48,7 @@ class UserSignInFragment : Fragment() {
         if (username.isEmpty()) {
             binding.layoutUsername.helperText = "Cannot be left blank"
             callback(false)
+            return
         }
         viewModel.checkUser(username, pass) { check ->
             if (check) {
