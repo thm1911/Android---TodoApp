@@ -43,13 +43,11 @@ class TaskDetailTrashFragment : Fragment() {
         var time = ""
         var date = ""
         var category = ""
-        var isDelete = false
 
         viewModel.getTaskById(id).observe(viewLifecycleOwner){task ->
             title = task.title
             description = task.description
             category = task.category
-            isDelete = task.isDelete
             val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
             val dateFormat = SimpleDateFormat("EE, dd MMM yyyy", Locale.getDefault())
 
