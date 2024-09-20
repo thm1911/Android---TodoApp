@@ -70,11 +70,31 @@
     </fragment>
     <fragment
         android:id="@+id/mainAppFragment"
-        android:name="com.example.todoapp.UI.MainApp.HomePage.MainAppFragment"
+        android:name="com.example.todoapp.UI.MainApp.MainAppFragment"
         android:label="fragment_main_app"
         tools:layout="@layout/fragment_main_app" >
         <argument
             android:name="theme"
             app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.todoapp.UI.MainApp.Calendar.CalendarFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/homePageFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.HomePageFragment"
+        android:label="fragment_home_page"
+        tools:layout="@layout/fragment_home_page" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.todoapp.UI.MainApp.Settings.SettingsFragment"
+        android:label="SettingsFragment"
+        tools:layout="@layout/fragment_settings"/>
+    <fragment
+        android:id="@+id/trashFragment"
+        android:name="com.example.todoapp.UI.MainApp.Trash.TrashFragment"
+        android:label="fragment_trash"
+        tools:layout="@layout/fragment_trash" />
 </navigation>
