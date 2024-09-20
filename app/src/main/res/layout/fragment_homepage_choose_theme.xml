@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/white"
+    tools:context=".UI.MainApp.ChooseTheme.HomepageChooseThemeFragment">
+
+    <TextView
+        android:id="@+id/text1"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="30sp"
+        android:autoSizeMinTextSize="20sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:text="@string/create_to_do_list"
+        android:textColor="@color/black"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.05"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.1" />
+
+    <TextView
+        android:id="@+id/text2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="15sp"
+        android:autoSizeMinTextSize="10sp"
+        android:autoSizeTextType="uniform"
+        android:gravity="center"
+        android:text="@string/choose_your_to_do_list_color_theme"
+        android:textColor="@color/grey"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHeight_percent="0.02"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/text1"
+        app:layout_constraintVertical_bias="0" />
+
+    <TextView
+        android:id="@+id/warning"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:autoSizeMaxTextSize="15sp"
+        android:autoSizeMinTextSize="10sp"
+        android:autoSizeTextType="uniform"
+        android:text="@string/no_theme_has_been_selected"
+        android:textColor="@color/red"
+        android:textStyle="bold"
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintHeight_percent="0.02"
+        app:layout_constraintHorizontal_bias="0.2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/text2"
+        app:layout_constraintVertical_bias="0"
+        app:layout_constraintWidth_percent="0.5" />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/theme"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@id/button"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toBottomOf="@id/warning">
+
+        <RadioButton
+            android:id="@+id/main_theme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/main_theme"
+            app:layout_constraintDimensionRatio="2.43:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <RadioButton
+            android:id="@+id/black_theme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/back_theme"
+            app:layout_constraintDimensionRatio="2.43:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/main_theme" />
+
+        <RadioButton
+            android:id="@+id/red_theme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/red_theme"
+            app:layout_constraintDimensionRatio="2.43:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/black_theme" />
+
+        <RadioButton
+            android:id="@+id/blue_theme"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:background="@drawable/blue_theme"
+            app:layout_constraintDimensionRatio="2.43:1"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHeight_percent="0.25"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/red_theme" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/button"
+        android:text="@string/open_noteapp"
+        android:textAllCaps="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintHeight_percent="0.06"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.9" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.05" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.95" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

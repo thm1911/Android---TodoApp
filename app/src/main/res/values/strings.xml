@@ -1,3 +1,35 @@
 <resources>
     <string name="app_name">Todo App</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="noteapp">Noteapp</string>
+    <string name="discription_app">The best to do list application for you</string>
+    <string name="skip">Skip >></string>
+    <string name="onboarding2_text1">Your convenience in making a todo list</string>
+    <string name="onboarding2_text2">Here\'s a mobile platform that helps you create task or to list so that it can help you in every job easier and faster.</string>
+    <string name="Continue">Continue</string>
+    <string name="onboarding3_text1">Find the practicality in making your todo list</string>
+    <string name="onboarding3_text2">Easy-to-understand user interface that makes you more comfortable when you want to create a task or to do list, Noteapp can also improve productivity</string>
+    <string name="sign_in">Sign In</string>
+    <string name="or">Or</string>
+    <string name="welcome"><b><font color="#FF000000">Welcome to</font></b><b><font color="#24A19C"> Noteapp</font></b></string>
+    <string name="create_account">Create Account</string>
+    <string name="create_account2">Create your account and feel the benefits</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email"><b><font color="#FF000000">Email Address</font></b><b><font color="#FF486A"> *</font></b></string>
+    <string name="enter_mail">abc@example.com</string>
+    <string name="next">Next</string>
+    <string name="username"><b><font color="#FF000000">Username</font></b><b><font color="#FF486A"> *</font></b></string>
+    <string name="password"><b><font color="#FF000000">Password</font></b><b><font color="#FF486A"> *</font></b></string>
+    <string name="cfpassword"><b><font color="#FF000000">Confirm password</font></b><b><font color="#FF486A"> *</font></b></string>
+    <string name="enter_username">Enter your username</string>
+    <string name="enter_password">Enter your password</string>
+    <string name="create_to_do_list">Create to do list</string>
+    <string name="choose_your_to_do_list_color_theme">Choose your to do list color theme</string>
+    <string name="welcome_back">Welcome Back!</string>
+    <string name="your_work_faster_and_structured_with_noteapp">Your work faster and structured with Noteapp</string>
+    <string name="forgot_password"><u>Forgot password?</u></string>
+    <string name="open_noteapp">Open Noteapp</string>
+    <string name="no_theme_has_been_selected">No theme has been selected</string>
+
 </resources>
