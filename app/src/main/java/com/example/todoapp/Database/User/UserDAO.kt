@@ -1,5 +1,6 @@
 package com.example.todoapp.Database.User
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -9,10 +10,10 @@ import com.example.todoapp.Model.User
 @Dao
 interface UserDAO {
     @Insert
-    suspend fun insertUser(user: User)
+    suspend fun insertUser(user: User): Long
 
     @Query("UPDATE User SET password = :newPassword WHERE id = :id")
-    fun updatePassword(id: Int, newPassword: String)
+    fun updatePassword(id: Long, newPassword: String)
 
     @Query("SELECT EXISTS(SELECT 1 FROM User WHERE email = :email)")
     suspend fun isEmailExist(email: String): Boolean
@@ -27,5 +28,8 @@ interface UserDAO {
     suspend fun setTheme(username: String, theme: Int)
 
     @Query("SELECT themeTask FROM User WHERE id = :id")
-    suspend fun getTheme(id: Int): Int
+    suspend fun getTheme(id: Long): Int
+
+    @Query("SELECT id FROM User WHERE username = :userName")
+    suspend fun getId(userName: String): Long
 }

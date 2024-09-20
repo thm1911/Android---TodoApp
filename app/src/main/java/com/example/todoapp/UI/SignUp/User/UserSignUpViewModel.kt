@@ -20,8 +20,9 @@ class UserSignUpViewModel(context: Context) : ViewModel() {
         callback(check)
     }
 
-    fun insertUser(user: User) = viewModelScope.launch {
-        userRepository.insertUser(user)
+    fun insertUser(user: User, callback: (Long) -> Unit) = viewModelScope.launch {
+        val id = userRepository.insertUser(user)
+        callback(id)
     }
 
     class UserSignUpViewModelFactory(private val context: Context) : ViewModelProvider.Factory {

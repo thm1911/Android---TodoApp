@@ -16,12 +16,11 @@ import java.util.Date
     ]
 )
 data class Task(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    val userId: Int,
+    @PrimaryKey(autoGenerate = true) val id: Long,
+    val userId: Long,
     val title: String,
     val description: String,
     val category: String,
-    val isDone: Boolean,
-    val createDate: Date,
+    val isDelete: Boolean,
     val dueDate: Date
 )

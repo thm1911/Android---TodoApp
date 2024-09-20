@@ -8,11 +8,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.RadioButton
 import androidx.core.content.ContextCompat
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.NavArgs
+import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todoapp.R
+import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.databinding.FragmentHomepageChooseThemeBinding
 
 class HomepageChooseThemeFragment : Fragment() {
@@ -23,6 +26,7 @@ class HomepageChooseThemeFragment : Fragment() {
     private val viewModel: HomepageChooseThemeViewModel by viewModels {
         HomepageChooseThemeViewModel.HomepageChooseThemeViewModelFactory(requireContext())
     }
+    private val shareViewModel: ShareViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -57,13 +61,14 @@ class HomepageChooseThemeFragment : Fragment() {
             }
         }
 
+        val navOption =
+            NavOptions.Builder().setPopUpTo(R.id.homepageChooseThemeFragment, true).build()
+
         binding.button.setOnClickListener {
             if (check) {
                 viewModel.setTheme(username, theme)
                 findNavController().navigate(
-                    HomepageChooseThemeFragmentDirections.actionHomepageChooseThemeFragmentToMainAppFragment(
-                        theme
-                    )
+                    HomepageChooseThemeFragmentDirections.actionHomepageChooseThemeFragmentToMainAppFragment(), navOption
                 )
             } else {
                 binding.warning.visibility = View.VISIBLE

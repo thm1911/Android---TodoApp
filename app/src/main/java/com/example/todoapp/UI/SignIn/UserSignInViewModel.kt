@@ -21,6 +21,11 @@ class UserSignInViewModel(context: Context) : ViewModel() {
             callback(check)
         }
 
+    fun getId(username: String, callback: (Long) -> Unit) = viewModelScope.launch {
+        val id = userRepository.getId(username)
+        callback(id)
+    }
+
     class UserSignInViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(UserSignInViewModel::class.java)) {
