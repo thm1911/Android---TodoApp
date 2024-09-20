@@ -31,5 +31,14 @@
     <string name="forgot_password"><u>Forgot password?</u></string>
     <string name="open_noteapp">Open Noteapp</string>
     <string name="no_theme_has_been_selected">No theme has been selected</string>
+    <string name="today">Today</string>
+    <string name="best_platform_for_creating_to_do_lists">Best platform for creating to-do lists</string>
+    <string name="create_task">Create Task</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="category">Category</string>
+    <string name="detail_task">Detail Task</string>
+    <string name="update">Update</string>
+    <string name="trash">Trash</string>
 
 </resources>
