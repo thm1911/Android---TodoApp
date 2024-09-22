@@ -47,7 +47,6 @@ class TaskDetailTrashFragment : Fragment() {
         viewModel.getTaskById(id).observe(viewLifecycleOwner){task ->
             title = task.title
             description = task.description
-            category = task.category
             val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
             val dateFormat = SimpleDateFormat("EE, dd MMM yyyy", Locale.getDefault())
 
@@ -58,7 +57,6 @@ class TaskDetailTrashFragment : Fragment() {
             binding.description.setText(description)
             binding.time.setText(time)
             binding.date.setText(date)
-            binding.category.setText(category)
         }
 
         binding.back.setOnClickListener {

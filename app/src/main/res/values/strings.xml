@@ -40,5 +40,11 @@
     <string name="detail_task">Detail Task</string>
     <string name="update">Update</string>
     <string name="trash">Trash</string>
+    <string name="add_category">Add Category</string>
+    <string name="create_category">Create Category</string>
+    <string name="please_fill_in_all_fields">Please fill in all fields</string>
+    <string name="create">Create</string>
+    <string name="add_date">Add Date</string>
+    <string name="add_time">Add Time</string>
 
 </resources>

@@ -31,6 +31,13 @@ class TaskDetailFragment : Fragment() {
     }
     private val shareViewModel: ShareViewModel by activityViewModels()
 
+    private var title = ""
+    private var description = ""
+    private var time = ""
+    private var date = ""
+    private var categoryId = 0L
+    private var isDelete = false
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -41,31 +48,15 @@ class TaskDetailFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        val mes = args.mes
         val id = args.id
-        var title = ""
-        var description = ""
-        var time = ""
-        var date = ""
-        var category = ""
-        var isDelete = false
 
-        viewModel.getTaskById(id).observe(viewLifecycleOwner){task ->
-            title = task.title
-            description = task.description
-            category = task.category
-            isDelete = task.isDelete
-            val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
-            val dateFormat = SimpleDateFormat("EE, dd MMM yyyy", Locale.getDefault())
-
-            time = timeFormat.format(task.dueDate)
-            date = dateFormat.format(task.dueDate)
-
-            binding.title.setText(title)
-            binding.description.setText(description)
-            binding.time.setText(time)
-            binding.date.setText(date)
-            binding.category.setText(category)
+        if(mes == "categoryId") {
+            init(shareViewModel.taskId, id)
+        }
+        else if(mes == "taskId") {
+            shareViewModel.taskId = id
+            init(id, 0L)
         }
 
         binding.time.setOnClickListener {
@@ -76,8 +67,12 @@ class TaskDetailFragment : Fragment() {
             DateDialog.selectDate(requireContext(), binding.date)
         }
 
+        binding.category.setOnClickListener {
+            updateCategory()
+        }
+
         binding.update.setOnClickListener {
-            update(id, title, description, time, date, category)
+            update(shareViewModel.taskId)
         }
 
         binding.back.setOnClickListener {
@@ -88,33 +83,51 @@ class TaskDetailFragment : Fragment() {
             moveTotrash(id)
         }
 
-        if(isDelete){
-            binding.restore.visibility = View.VISIBLE
-
-            binding.restore.setOnClickListener {
-                restore(id)
-            }
-
-            binding.delete.setOnClickListener {
-                delete(id)
-            }
-        }
-
     }
 
-    private fun update(id: Long, title: String, description: String, time: String, date: String, category: String){
+    private fun init(taskId: Long, newCategoryId: Long){
+        if(taskId != 0L) {
+            viewModel.getTaskById(taskId).observe(viewLifecycleOwner) { task ->
+                title = task.title
+                description = task.description
+                isDelete = task.isDelete
+                if(newCategoryId == 0L) categoryId = task.categoryId
+                else categoryId = newCategoryId
+                val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
+                val dateFormat = SimpleDateFormat("EE, dd MMM yyyy", Locale.getDefault())
+
+                time = timeFormat.format(task.dueDate)
+                date = dateFormat.format(task.dueDate)
+
+                binding.title.setText(title)
+                binding.description.setText(description)
+                binding.time.setText(time)
+                binding.date.setText(date)
+
+                viewModel.getCategoryById(categoryId).observe(viewLifecycleOwner) { category ->
+                    val name = category.name
+                    binding.category.setText(name)
+                }
+            }
+        }
+    }
+
+    private fun updateCategory(){
+        findNavController().navigate(TaskDetailFragmentDirections.actionTaskDetailFragmentToCategoryFragment("Task Detail"))
+    }
+
+    private fun update(taskId: Long){
         val newTitle = binding.title.text.toString()
         val newDescription= binding.description.text.toString()
         val newTime = binding.time.text.toString()
         val newDate = binding.date.text.toString()
-        val newCategory = binding.category.text.toString()
 
-        if(title == newTitle && description == newDescription && time == newTime && date == newDate && category == newCategory){
+        if(title == newTitle && description == newDescription && time == newTime && date == newDate ){
             findNavController().popBackStack()
         }
         else{
             val date = SimpleDateFormat("EE, dd MMM yyyy HH:mm", Locale.getDefault())
-            val task = Task(id,shareViewModel.userId, newTitle, newDescription, newCategory,false, date.parse("$newDate $newTime"))
+            val task = Task(taskId,shareViewModel.userId, newTitle, newDescription, categoryId,date.parse("$newDate $newTime"),false)
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Update")
             builder.setMessage("Are you sure update Task?")
@@ -149,37 +162,6 @@ class TaskDetailFragment : Fragment() {
         dialog.show()
     }
 
-    private fun restore(id: Long){
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Restore Task")
-        builder.setMessage("Are you sure you want to restore Task?")
-        builder.setNegativeButton("OK"){dialog, which ->
-            viewModel.restoreTask(id)
-            findNavController().popBackStack()
-        }
-        builder.setPositiveButton("Cancel"){dialog, which ->
-            dialog.dismiss()
-        }
-
-        val dialog = builder.create()
-        dialog.show()
-    }
-
-    private fun delete(id: Long){
-        val builder = AlertDialog.Builder(requireContext())
-        builder.setTitle("Delete Task")
-        builder.setMessage("Task will be permanently deleted. You still want to delete them?")
-        builder.setNegativeButton("OK"){dialog, which ->
-            viewModel.delete(id)
-            findNavController().popBackStack()
-        }
-        builder.setPositiveButton("Cancel"){dialog, which ->
-            dialog.dismiss()
-        }
-
-        val dialog = builder.create()
-        dialog.show()
-    }
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
