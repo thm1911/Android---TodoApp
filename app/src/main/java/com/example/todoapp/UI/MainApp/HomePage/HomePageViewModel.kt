@@ -7,6 +7,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.example.todoapp.Adapter.RecyclerViewAdapter.TaskAdapter
+import com.example.todoapp.Database.Category.CategoryRepository
 import com.example.todoapp.Database.Task.TaskRepository
 import com.example.todoapp.Database.User.UserRepository
 import com.example.todoapp.Model.Task
@@ -18,7 +19,6 @@ class HomePageViewModel(shareViewModel: ShareViewModel, context: Context): ViewM
     private val userRepository: UserRepository
     val listTask: LiveData<List<Task>>
     init{
-
         taskRepository = TaskRepository(context)
         userRepository = UserRepository(context)
         val userId = shareViewModel.userId
@@ -29,7 +29,6 @@ class HomePageViewModel(shareViewModel: ShareViewModel, context: Context): ViewM
         val theme = userRepository.getTheme(id)
         callBack(theme)
     }
-
 
     class HomePageViewModelFactory(private val shareViewModel: ShareViewModel, private val context: Context): ViewModelProvider
     .Factory{

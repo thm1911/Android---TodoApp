@@ -37,5 +37,4 @@ interface TaskDAO{
     @Query("SELECT * FROM Task WHERE id = :id")
     fun getTaskById(id: Long): LiveData<Task>
 
-
 }
