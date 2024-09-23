@@ -7,4 +7,5 @@ import androidx.lifecycle.ViewModelProvider
 class ShareViewModel: ViewModel() {
     var userId: Long = 0
     var taskId: Long = 0
+    var isLinearLayout: Boolean = true
 }

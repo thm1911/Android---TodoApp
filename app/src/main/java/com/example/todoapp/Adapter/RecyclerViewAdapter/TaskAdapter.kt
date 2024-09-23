@@ -1,6 +1,5 @@
 package com.example.todoapp.Adapter.RecyclerViewAdapter
 
-import android.graphics.drawable.ColorDrawable
 import android.graphics.drawable.GradientDrawable
 import android.icu.text.SimpleDateFormat
 import android.view.LayoutInflater
@@ -24,7 +23,7 @@ class TaskAdapter(private val onClick: (Task) -> Unit): RecyclerView.Adapter<Tas
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val binding = LayoutInflater.from(parent.context).inflate(R.layout.fragment_task, parent, false)
+        val binding = LayoutInflater.from(parent.context).inflate(R.layout.fragment_task_item, parent, false)
         return TaskViewHolder(binding)
     }
 

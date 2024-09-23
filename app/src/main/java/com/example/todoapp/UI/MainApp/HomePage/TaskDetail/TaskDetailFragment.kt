@@ -36,6 +36,7 @@ class TaskDetailFragment : Fragment() {
     private var time = ""
     private var date = ""
     private var categoryId = 0L
+    private var nameCategory = ""
     private var isDelete = false
 
     override fun onCreateView(
@@ -50,6 +51,7 @@ class TaskDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mes = args.mes
         val id = args.id
+        nameCategory = binding.category.text.toString()
 
         if(mes == "categoryId") {
             init(shareViewModel.taskId, id)
@@ -121,8 +123,9 @@ class TaskDetailFragment : Fragment() {
         val newDescription= binding.description.text.toString()
         val newTime = binding.time.text.toString()
         val newDate = binding.date.text.toString()
+        val newNameCategory = binding.category.text.toString()
 
-        if(title == newTitle && description == newDescription && time == newTime && date == newDate ){
+        if(title == newTitle && description == newDescription && time == newTime && date == newDate && nameCategory == newNameCategory){
             findNavController().popBackStack()
         }
         else{

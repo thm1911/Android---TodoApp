@@ -48,7 +48,7 @@
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintHeight_percent="0.85"
         app:layout_constraintVertical_bias="0.7"
-        tools:listitem="@layout/fragment_task" />
+        tools:listitem="@layout/fragment_task_item" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"

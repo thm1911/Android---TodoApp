@@ -12,5 +12,6 @@ class SpacingItem(val space: Int): RecyclerView.ItemDecoration() {
         state: RecyclerView.State
     ) {
         outRect.bottom = space
+        outRect.right = space
     }
 }

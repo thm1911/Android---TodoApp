@@ -24,7 +24,7 @@ class TaskDetailTrashFragment : Fragment() {
     private val viewModel: TaskDetailTrashViewModel by viewModels(){
         TaskDetailTrashViewModel.TaskDetailTrashViewModelFactory(requireContext())
     }
-    private val args: TaskDetailFragmentArgs by navArgs()
+    private val args: TaskDetailTrashFragmentArgs by navArgs()
 
 
     override fun onCreateView(
@@ -42,11 +42,12 @@ class TaskDetailTrashFragment : Fragment() {
         var description = ""
         var time = ""
         var date = ""
-        var category = ""
+        var category = 0L
 
         viewModel.getTaskById(id).observe(viewLifecycleOwner){task ->
             title = task.title
             description = task.description
+            category = task.categoryId
             val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
             val dateFormat = SimpleDateFormat("EE, dd MMM yyyy", Locale.getDefault())
 
@@ -57,6 +58,10 @@ class TaskDetailTrashFragment : Fragment() {
             binding.description.setText(description)
             binding.time.setText(time)
             binding.date.setText(date)
+
+            viewModel.getCategoryById(category).observe(viewLifecycleOwner){category ->
+                binding.category.setText(category.name)
+            }
         }
 
         binding.back.setOnClickListener {
