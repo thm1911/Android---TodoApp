@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoapp.Adapter.RecyclerViewAdapter.TaskAdapter
 import com.example.todoapp.R
@@ -23,6 +24,9 @@ class HomePageFragment : Fragment() {
         HomePageViewModel.HomePageViewModelFactory(shareViewModel, requireContext())
     }
     private val shareViewModel: ShareViewModel by activityViewModels()
+    private lateinit var linearLayoutManager: LinearLayoutManager
+    private lateinit var gridLayoutManager: GridLayoutManager
+    private var isLinearLayout: Boolean = true
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +48,12 @@ class HomePageFragment : Fragment() {
             bottom_nav.visibility = View.GONE
         }
 
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        linearLayoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        gridLayoutManager = GridLayoutManager(requireContext(), 2)
+
+        if(isLinearLayout) recyclerView.layoutManager = linearLayoutManager
+        else recyclerView.layoutManager = gridLayoutManager
+
         recyclerView.adapter = adapter
         val space = resources.getDimensionPixelSize(R.dimen.space)
         recyclerView.addItemDecoration(SpacingItem(space))
@@ -59,6 +68,20 @@ class HomePageFragment : Fragment() {
         binding.createTask.setOnClickListener {
             findNavController().navigate(HomePageFragmentDirections.actionHomePageFragmentToCreateTaskFragment(0L, "taskId"))
             bottom_nav.visibility = View.GONE
+        }
+
+        binding.layout.setOnClickListener {
+            isLinearLayout = !isLinearLayout
+            if(isLinearLayout){
+                shareViewModel.isLinearLayout = true
+                recyclerView.layoutManager = linearLayoutManager
+                binding.layout.setBackgroundResource(R.drawable.ic_linear_layout)
+            }
+            else{
+                shareViewModel.isLinearLayout = false
+                recyclerView.layoutManager = gridLayoutManager
+                binding.layout.setBackgroundResource(R.drawable.ic_grid_layout)
+            }
         }
 
     }

@@ -41,9 +41,10 @@
         android:autoSizeTextType="uniform"/>
 
     <View
+        android:id="@+id/layout"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/ic_display"
+        android:background="@drawable/ic_linear_layout"
         app:layout_constraintTop_toTopOf="@id/text1"
         app:layout_constraintBottom_toBottomOf="@id/text2"
         app:layout_constraintStart_toEndOf="@id/text2"
@@ -76,7 +77,7 @@
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintHeight_percent="0.8"
         app:layout_constraintVertical_bias="1"
-        tools:listitem="@layout/fragment_task"/>
+        tools:listitem="@layout/fragment_task_item"/>
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline1"

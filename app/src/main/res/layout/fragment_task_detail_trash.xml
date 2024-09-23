@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/bg"
+    android:background="@color/white"
     tools:context=".UI.MainApp.Trash.TaskDetailTrash.TaskDetailTrashFragment">
 
     <View
@@ -97,7 +97,7 @@
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintHeight_percent="0.05"
-        android:background="@drawable/shape"
+        android:background="@drawable/edit_text"
         android:textColor="@color/red"
         android:gravity="center"
         app:layout_constraintWidth_percent="0.3"
@@ -115,7 +115,7 @@
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintHeight_percent="0.05"
-        android:background="@drawable/shape"
+        android:background="@drawable/edit_text"
         android:textColor="@color/black"
         android:gravity="center"
         app:layout_constraintWidth_percent="0.4"
@@ -133,9 +133,12 @@
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
         app:layout_constraintHeight_percent="0.05"
-        android:background="@drawable/shape"
+        android:background="@drawable/edit_text"
         app:layout_constraintWidth_percent="0.5"
+        android:textColor="@color/black"
+        android:drawableStart="@drawable/ic_category"
         android:paddingStart="10dp"
+        android:gravity="center"
         app:layout_constraintHorizontal_bias="0"
         app:layout_constraintVertical_bias="0.03"/>
 

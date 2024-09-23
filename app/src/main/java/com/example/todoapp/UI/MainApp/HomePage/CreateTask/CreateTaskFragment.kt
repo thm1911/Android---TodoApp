@@ -1,6 +1,5 @@
 package com.example.todoapp.UI.MainApp.HomePage.CreateTask
 
-import android.graphics.Color
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -12,9 +11,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todoapp.Model.Task
 import com.example.todoapp.R
-import com.example.todoapp.UI.MainApp.HomePage.Category.CategoryFragment
-import com.example.todoapp.UI.MainApp.HomePage.Category.CreateCategory.BottomCreateCategoryFragment
-import com.example.todoapp.UI.MainApp.HomePage.CreateTask.CreateTaskFragmentArgs
 import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.Utils.DatePicker.DateDialog
 import com.example.todoapp.Utils.TimePicker.TimeDialog

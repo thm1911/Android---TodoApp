@@ -11,30 +11,27 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.example.todoapp.Adapter.RecyclerViewAdapter.CategoryAdapter
-import com.example.todoapp.Adapter.RecyclerViewAdapter.TaskAdapter
-import com.example.todoapp.Model.Category
 import com.example.todoapp.R
 import com.example.todoapp.UI.MainApp.HomePage.Category.CreateCategory.BottomCreateCategoryFragment
 import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.UI.SpacingItem
-import com.example.todoapp.databinding.FragmentCategoryBinding
+import com.example.todoapp.databinding.FragmentChooseCategoryBinding
 
-class CategoryFragment : Fragment() {
-    private var _binding: FragmentCategoryBinding? = null
+class ChooseCategoryFragment : Fragment() {
+    private var _binding: FragmentChooseCategoryBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: CategoryViewModel by viewModels {
-        CategoryViewModel.CategoryViewModelFactory(shareViewModel, requireContext())
+    private val viewModel: ChooseCategoryViewModel by viewModels {
+        ChooseCategoryViewModel.ChooseCategoryViewModelFactory(shareViewModel, requireContext())
     }
     private val shareViewModel: ShareViewModel by activityViewModels()
-    private val args: CategoryFragmentArgs by navArgs()
+    private val args: ChooseCategoryFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        _binding = FragmentCategoryBinding.inflate(inflater, container, false)
+        _binding = FragmentChooseCategoryBinding.inflate(inflater, container, false)
         return binding.root
     }
 
@@ -65,11 +62,11 @@ class CategoryFragment : Fragment() {
             val mes = args.mes
 
             if (mes == "Create Task"){
-                findNavController().navigate(CategoryFragmentDirections.actionCategoryFragmentToCreateTaskFragment(categoryId, "categoryId"), navOption1)
+                findNavController().navigate(ChooseCategoryFragmentDirections.actionCategoryFragmentToCreateTaskFragment(categoryId, "categoryId"), navOption1)
             }
 
             else if (mes == "Task Detail"){
-                findNavController().navigate(CategoryFragmentDirections.actionCategoryFragmentToTaskDetailFragment(categoryId, "categoryId"), navOption2)
+                findNavController().navigate(ChooseCategoryFragmentDirections.actionCategoryFragmentToTaskDetailFragment(categoryId, "categoryId"), navOption2)
             }
         }
         recyclerView.adapter = adapter

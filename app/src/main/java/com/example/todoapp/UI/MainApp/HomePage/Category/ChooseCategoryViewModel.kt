@@ -8,7 +8,7 @@ import com.example.todoapp.Database.Category.CategoryRepository
 import com.example.todoapp.Model.Category
 import com.example.todoapp.UI.ShareViewModel
 
-class CategoryViewModel(shareViewModel: ShareViewModel, context: Context): ViewModel() {
+class ChooseCategoryViewModel(shareViewModel: ShareViewModel, context: Context): ViewModel() {
     private val categoryRepository: CategoryRepository
     val listCategory: LiveData<List<Category>>
     init {
@@ -17,12 +17,12 @@ class CategoryViewModel(shareViewModel: ShareViewModel, context: Context): ViewM
         listCategory = categoryRepository.getAllCategory(userId)
     }
 
-    class CategoryViewModelFactory(private val shareViewModel: ShareViewModel, private val context: Context): ViewModelProvider
+    class ChooseCategoryViewModelFactory(private val shareViewModel: ShareViewModel, private val context: Context): ViewModelProvider
     .Factory{
             override fun <T: ViewModel> create (modelClass: Class<T>): T{
-                if(modelClass.isAssignableFrom(CategoryViewModel::class.java)){
+                if(modelClass.isAssignableFrom(ChooseCategoryViewModel::class.java)){
                     @Suppress("UNCHECKED_CAST")
-                    return CategoryViewModel(shareViewModel, context) as T
+                    return ChooseCategoryViewModel(shareViewModel, context) as T
                 }
                 throw IllegalArgumentException("Unknown ViewModel class")
             }
