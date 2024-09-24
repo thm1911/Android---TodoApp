@@ -16,9 +16,10 @@ import com.example.todoapp.R
 import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.databinding.FragmentBottomCreateCategoryBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import kotlinx.coroutines.flow.callbackFlow
 import kotlin.coroutines.cancellation.CancellationException
 
-class BottomCreateCategoryFragment : BottomSheetDialogFragment() {
+class BottomCreateCategoryFragment() : BottomSheetDialogFragment() {
     private var _binding: FragmentBottomCreateCategoryBinding? = null
     private val binding get() = _binding!!
     private val viewModel: BottomCreateCategoryViewModel by viewModels {
@@ -46,7 +47,9 @@ class BottomCreateCategoryFragment : BottomSheetDialogFragment() {
         }
 
         binding.done.setOnClickListener {
-            check()
+            check{check ->
+                if(check) dismiss()
+            }
         }
     }
 
@@ -83,17 +86,27 @@ class BottomCreateCategoryFragment : BottomSheetDialogFragment() {
 
     }
 
-    private fun check(){
+    private fun check(callBack: (Boolean) -> Unit){
         val name = binding.name.text.toString()
         val hexColor = binding.hex.text.toString()
 
+        viewModel.isNameExist(name, shareViewModel.userId){check ->
+            if(check){
+                callBack(false)
+                binding.warningText.setText("Title is exists")
+                binding.warningText.visibility = View.VISIBLE
+            }
+            else callBack(true)
+        }
         if(name.isEmpty() || hexColor == "Select color"){
+            binding.warningText.setText("Please fill in all fields")
             binding.warningText.visibility = View.VISIBLE
+            callBack(false)
         }
         else{
             binding.warningText.visibility = View.INVISIBLE
             insertCategory()
-            dismiss()
+            callBack(true)
         }
     }
 

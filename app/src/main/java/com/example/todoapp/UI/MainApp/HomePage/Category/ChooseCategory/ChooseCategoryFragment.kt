@@ -1,4 +1,4 @@
-package com.example.todoapp.UI.MainApp.HomePage.Category
+package com.example.todoapp.UI.MainApp.HomePage.Category.ChooseCategory
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoapp.Adapter.RecyclerViewAdapter.CategoryAdapter
 import com.example.todoapp.R
@@ -48,7 +49,7 @@ class ChooseCategoryFragment : Fragment() {
         }
 
         val recyclerView = binding.containerCategory
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager = GridLayoutManager(requireContext(), 2)
 
         val navOption1 = NavOptions.Builder().setPopUpTo(R.id.categoryFragment, true)
             .setPopUpTo(R.id.createTaskFragment, true)
@@ -73,7 +74,7 @@ class ChooseCategoryFragment : Fragment() {
         val space = resources.getDimensionPixelSize(R.dimen.space)
         recyclerView.addItemDecoration(SpacingItem(space))
 
-        viewModel.listCategory.observe(viewLifecycleOwner){category ->
+        viewModel.listCategoryAndTask.observe(viewLifecycleOwner){category ->
             adapter.setData(category)
         }
 

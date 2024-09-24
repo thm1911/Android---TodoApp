@@ -37,4 +37,7 @@ interface TaskDAO{
     @Query("SELECT * FROM Task WHERE id = :id")
     fun getTaskById(id: Long): LiveData<Task>
 
+    @Query("SELECT * FROM Task WHERE categoryId = :categoryId AND userId = :userId")
+    fun getAllTaskByCategory(categoryId: Long, userId: Long): LiveData<List<Task>>
+
 }

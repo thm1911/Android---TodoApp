@@ -3,20 +3,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main_nav_graph"
-    app:startDestination="@id/homePageFragment">
+    app:startDestination="@id/homeFragment">
 
-    <fragment
-        android:id="@+id/homePageFragment"
-        android:name="com.example.todoapp.UI.MainApp.HomePage.HomePageFragment"
-        android:label="fragment_home_page"
-        tools:layout="@layout/fragment_home_page" >
-        <action
-            android:id="@+id/action_homePageFragment_to_taskDetailFragment"
-            app:destination="@id/taskDetailFragment" />
-        <action
-            android:id="@+id/action_homePageFragment_to_createTaskFragment"
-            app:destination="@id/createTaskFragment" />
-    </fragment>
     <fragment
         android:id="@+id/calendarFragment"
         android:name="com.example.todoapp.UI.MainApp.Calendar.CalendarFragment"
@@ -38,7 +26,7 @@
         tools:layout="@layout/fragment_settings" />
     <fragment
         android:id="@+id/categoryFragment"
-        android:name="com.example.todoapp.UI.MainApp.HomePage.Category.ChooseCategoryFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.Category.ChooseCategory.ChooseCategoryFragment"
         android:label="fragment_category"
         tools:layout="@layout/fragment_choose_category" >
         <action
@@ -53,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/taskDetailFragment"
-        android:name="com.example.todoapp.UI.MainApp.HomePage.TaskDetail.TaskDetailFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.Task.TaskDetail.TaskDetailFragment"
         android:label="fragment_task_detail"
         tools:layout="@layout/fragment_task_detail" >
         <argument
@@ -76,7 +64,7 @@
     </fragment>
     <fragment
         android:id="@+id/createTaskFragment"
-        android:name="com.example.todoapp.UI.MainApp.HomePage.CreateTask.CreateTaskFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.Task.CreateTask.CreateTaskFragment"
         android:label="fragment_create_task"
         tools:layout="@layout/fragment_create_task" >
         <action
@@ -88,5 +76,44 @@
         <argument
             android:name="mes"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_taskHomeFragment"
+            app:destination="@id/taskHomeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryHomeFragment"
+            app:destination="@id/categoryHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskHomeFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.Task.TaskHomeFragment"
+        android:label="fragment_task_home"
+        tools:layout="@layout/fragment_task_home" >
+        <action
+            android:id="@+id/action_taskHomeFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_taskHomeFragment_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+        <argument
+            android:name="categoryId"
+            app:argType="long" />
+        <argument
+            android:name="mes"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryHomeFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.Category.CategoryHomeFragment"
+        android:label="fragment_category_home"
+        tools:layout="@layout/fragment_category_home" >
+        <action
+            android:id="@+id/action_categoryHomeFragment_to_taskHomeFragment"
+            app:destination="@id/taskHomeFragment" />
     </fragment>
 </navigation>
