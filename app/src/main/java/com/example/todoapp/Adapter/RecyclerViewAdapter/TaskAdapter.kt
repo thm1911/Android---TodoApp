@@ -15,6 +15,7 @@ import java.util.Locale
 class TaskAdapter(private val onClick: (Task) -> Unit): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     private val tasks = mutableListOf<Task>()
     private var themeTask: Int = 0
+    private var showAll: Boolean = true
     class TaskViewHolder(view: View): RecyclerView.ViewHolder(view){
         val theme: TextView = view.findViewById(R.id.theme)
         val title: TextView = view.findViewById(R.id.title)
@@ -28,7 +29,13 @@ class TaskAdapter(private val onClick: (Task) -> Unit): RecyclerView.Adapter<Tas
     }
 
     override fun getItemCount(): Int {
-        return tasks.size
+        if (showAll) return tasks.size
+        else return 2
+    }
+
+    fun showAllTask(check: Boolean){
+        showAll = check
+        notifyDataSetChanged()
     }
 
     override fun onBindViewHolder(holder: TaskViewHolder, position: Int) {
@@ -39,8 +46,7 @@ class TaskAdapter(private val onClick: (Task) -> Unit): RecyclerView.Adapter<Tas
         holder.time.text = timeFormat.format(curTask.dueDate)
         holder.date.text = dateFormat.format(curTask.dueDate)
 
-        val drawable = holder.theme.background as GradientDrawable
-        drawable.setColor(themeTask)
+        holder.theme.setBackgroundColor(themeTask)
 
         holder.itemView.setOnClickListener {
             onClick(curTask)

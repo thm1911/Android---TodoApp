@@ -46,5 +46,10 @@
     <string name="create">Create</string>
     <string name="add_date">Add Date</string>
     <string name="add_time">Add Time</string>
+    <string name="no_task">No Task</string>
+    <string name="view_all">View All >></string>
+    <string name="task">Task</string>
+    <string name="all_task">All Task</string>
+    <string name="all_category">All Category</string>
 
 </resources>

@@ -1,4 +1,4 @@
-package com.example.todoapp.UI.MainApp.HomePage.CreateTask
+package com.example.todoapp.UI.MainApp.HomePage.Task.CreateTask
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -87,7 +87,11 @@ class CreateTaskFragment : Fragment() {
 
 
     private fun selectCategory(){
-        findNavController().navigate(CreateTaskFragmentDirections.actionCreateTaskFragmentToCategoryFragment("Create Task"))
+        findNavController().navigate(
+            CreateTaskFragmentDirections.actionCreateTaskFragmentToCategoryFragment(
+                "Create Task"
+            )
+        )
     }
 
     private fun insertTask(categoryId: Long){

@@ -1,11 +1,9 @@
-package com.example.todoapp.UI.MainApp.HomePage.TaskDetail
+package com.example.todoapp.UI.MainApp.HomePage.Task.TaskDetail
 
 import android.content.Context
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import androidx.lifecycle.viewmodel.viewModelFactory
 import com.example.todoapp.Database.Category.CategoryRepository
 import com.example.todoapp.Database.Task.TaskRepository
 import com.example.todoapp.Model.Task
