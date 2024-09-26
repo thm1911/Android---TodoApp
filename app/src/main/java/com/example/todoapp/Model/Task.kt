@@ -12,16 +12,21 @@ import java.util.Date
             parentColumns = ["id"],
             childColumns = ["userId"],
             onDelete = ForeignKey.CASCADE
+        ),
+        ForeignKey(
+            entity = Category::class,
+            parentColumns = ["id"],
+            childColumns = ["categoryId"],
+            onDelete = ForeignKey.CASCADE
         )
     ]
 )
 data class Task(
-    @PrimaryKey(autoGenerate = true) val id: Int,
-    val userId: Int,
+    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    val userId: Long,
     val title: String,
     val description: String,
-    val category: String,
-    val isDone: Boolean,
-    val createDate: Date,
-    val dueDate: Date
+    val categoryId: Long,
+    val dueDate: Date,
+    val isDelete: Boolean,
 )

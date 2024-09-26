@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/calendarFragment"
+        android:name="com.example.todoapp.UI.MainApp.Calendar.CalendarFragment"
+        android:label="fragment_calendar"
+        tools:layout="@layout/fragment_calendar" />
+    <fragment
+        android:id="@+id/trashFragment"
+        android:name="com.example.todoapp.UI.MainApp.Trash.TrashFragment"
+        android:label="fragment_trash"
+        tools:layout="@layout/fragment_trash" >
+        <action
+            android:id="@+id/action_trashFragment_to_taskDetailTrashFragment"
+            app:destination="@id/taskDetailTrashFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="com.example.todoapp.UI.MainApp.Settings.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/categoryFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.Category.ChooseCategory.ChooseCategoryFragment"
+        android:label="fragment_category"
+        tools:layout="@layout/fragment_choose_category" >
+        <action
+            android:id="@+id/action_categoryFragment_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+        <argument
+            android:name="mes"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_categoryFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetailFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.Task.TaskDetail.TaskDetailFragment"
+        android:label="fragment_task_detail"
+        tools:layout="@layout/fragment_task_detail" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+        <action
+            android:id="@+id/action_taskDetailFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <argument android:name="mes"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskDetailTrashFragment"
+        android:name="com.example.todoapp.UI.MainApp.Trash.TaskDetailTrash.TaskDetailTrashFragment"
+        android:label="fragment_task_detail_trash"
+        tools:layout="@layout/fragment_task_detail_trash" >
+        <argument
+            android:name="id"
+            app:argType="long" />
+    </fragment>
+    <fragment
+        android:id="@+id/createTaskFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.Task.CreateTask.CreateTaskFragment"
+        android:label="fragment_create_task"
+        tools:layout="@layout/fragment_create_task" >
+        <action
+            android:id="@+id/action_createTaskFragment_to_categoryFragment"
+            app:destination="@id/categoryFragment" />
+        <argument
+            android:name="id"
+            app:argType="long" />
+        <argument
+            android:name="mes"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.HomeFragment"
+        android:label="fragment_home"
+        tools:layout="@layout/fragment_home" >
+        <action
+            android:id="@+id/action_homeFragment_to_taskHomeFragment"
+            app:destination="@id/taskHomeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_categoryHomeFragment"
+            app:destination="@id/categoryHomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/taskHomeFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.Task.TaskHomeFragment"
+        android:label="fragment_task_home"
+        tools:layout="@layout/fragment_task_home" >
+        <action
+            android:id="@+id/action_taskHomeFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
+        <action
+            android:id="@+id/action_taskHomeFragment_to_createTaskFragment"
+            app:destination="@id/createTaskFragment" />
+        <argument
+            android:name="categoryId"
+            app:argType="long" />
+        <argument
+            android:name="mes"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/categoryHomeFragment"
+        android:name="com.example.todoapp.UI.MainApp.HomePage.Category.CategoryHomeFragment"
+        android:label="fragment_category_home"
+        tools:layout="@layout/fragment_category_home" >
+        <action
+            android:id="@+id/action_categoryHomeFragment_to_taskHomeFragment"
+            app:destination="@id/taskHomeFragment" />
+    </fragment>
+</navigation>
