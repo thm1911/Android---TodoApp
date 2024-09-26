@@ -58,23 +58,31 @@ class ChooseCategoryFragment : Fragment() {
             .setPopUpTo(R.id.taskDetailFragment, true)
             .build()
 
-        val adapter = CategoryAdapter{category ->
+        val adapter = CategoryAdapter { category ->
             val categoryId = category.id
             val mes = args.mes
 
-            if (mes == "Create Task"){
-                findNavController().navigate(ChooseCategoryFragmentDirections.actionCategoryFragmentToCreateTaskFragment(categoryId, "categoryId"), navOption1)
-            }
-
-            else if (mes == "Task Detail"){
-                findNavController().navigate(ChooseCategoryFragmentDirections.actionCategoryFragmentToTaskDetailFragment(categoryId, "categoryId"), navOption2)
+            if (mes == "Create Task") {
+                findNavController().navigate(
+                    ChooseCategoryFragmentDirections.actionCategoryFragmentToCreateTaskFragment(
+                        categoryId,
+                        "categoryId"
+                    ), navOption1
+                )
+            } else if (mes == "Task Detail") {
+                findNavController().navigate(
+                    ChooseCategoryFragmentDirections.actionCategoryFragmentToTaskDetailFragment(
+                        categoryId,
+                        "categoryId"
+                    ), navOption2
+                )
             }
         }
         recyclerView.adapter = adapter
         val space = resources.getDimensionPixelSize(R.dimen.space)
         recyclerView.addItemDecoration(SpacingItem(space))
 
-        viewModel.listCategoryAndTask.observe(viewLifecycleOwner){category ->
+        viewModel.listCategoryAndTask.observe(viewLifecycleOwner) { category ->
             adapter.setData(category)
         }
 

@@ -88,6 +88,9 @@
         <action
             android:id="@+id/action_homeFragment_to_categoryHomeFragment"
             app:destination="@id/categoryHomeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_taskDetailFragment"
+            app:destination="@id/taskDetailFragment" />
     </fragment>
     <fragment
         android:id="@+id/taskHomeFragment"

@@ -47,16 +47,16 @@ class BottomCreateCategoryFragment() : BottomSheetDialogFragment() {
         }
 
         binding.done.setOnClickListener {
-            check{check ->
-                if(check) dismiss()
+            check { check ->
+                if (check) dismiss()
             }
         }
     }
 
-    private fun selectColor(){
+    private fun selectColor() {
         val listColor = resources.getStringArray(R.array.color_list)
 
-        val colorDialogView = layoutInflater.inflate(R.layout.dialog_color_picker,null)
+        val colorDialogView = layoutInflater.inflate(R.layout.dialog_color_picker, null)
         val colorDialog = AlertDialog.Builder(requireContext())
             .setTitle("Color")
             .setView(colorDialogView)
@@ -86,31 +86,29 @@ class BottomCreateCategoryFragment() : BottomSheetDialogFragment() {
 
     }
 
-    private fun check(callBack: (Boolean) -> Unit){
+    private fun check(callBack: (Boolean) -> Unit) {
         val name = binding.name.text.toString()
         val hexColor = binding.hex.text.toString()
 
-        viewModel.isNameExist(name, shareViewModel.userId){check ->
-            if(check){
+        viewModel.isNameExist(name, shareViewModel.userId) { check ->
+            if (check) {
                 callBack(false)
                 binding.warningText.setText("Title is exists")
                 binding.warningText.visibility = View.VISIBLE
-            }
-            else callBack(true)
+            } else callBack(true)
         }
-        if(name.isEmpty() || hexColor == "Select color"){
+        if (name.isEmpty() || hexColor == "Select color") {
             binding.warningText.setText("Please fill in all fields")
             binding.warningText.visibility = View.VISIBLE
             callBack(false)
-        }
-        else{
+        } else {
             binding.warningText.visibility = View.INVISIBLE
             insertCategory()
             callBack(true)
         }
     }
 
-    private fun insertCategory(){
+    private fun insertCategory() {
         val name = binding.name.text.toString()
         val hexColor = binding.hex.text.toString()
         val userId = shareViewModel.userId

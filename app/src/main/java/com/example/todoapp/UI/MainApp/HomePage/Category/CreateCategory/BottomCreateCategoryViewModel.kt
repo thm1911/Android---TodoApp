@@ -9,8 +9,9 @@ import com.example.todoapp.Database.Category.CategoryRepository
 import com.example.todoapp.Model.Category
 import kotlinx.coroutines.launch
 
-class BottomCreateCategoryViewModel(context: Context): ViewModel() {
+class BottomCreateCategoryViewModel(context: Context) : ViewModel() {
     private val categoryRepository: CategoryRepository
+
     init {
         categoryRepository = CategoryRepository(context)
     }
@@ -19,10 +20,11 @@ class BottomCreateCategoryViewModel(context: Context): ViewModel() {
         categoryRepository.insertCategory(category)
     }
 
-    fun isNameExist(name: String, userId: Long, CallBack: (Boolean) -> Unit) = viewModelScope.launch {
-        val check = categoryRepository.isNameExists(name, userId)
-        CallBack(check)
-    }
+    fun isNameExist(name: String, userId: Long, CallBack: (Boolean) -> Unit) =
+        viewModelScope.launch {
+            val check = categoryRepository.isNameExists(name, userId)
+            CallBack(check)
+        }
 
     fun getCategoryById(id: Long) = categoryRepository.getCategoryById(id)
 
@@ -30,14 +32,14 @@ class BottomCreateCategoryViewModel(context: Context): ViewModel() {
         categoryRepository.updateCategory(category)
     }
 
-    class BottomCreateCategoryViewModelFactory(private val context: Context): ViewModelProvider
-    .Factory{
-            override fun <T: ViewModel> create (modelClass: Class<T>): T{
-                if(modelClass.isAssignableFrom(BottomCreateCategoryViewModel::class.java)){
-                    @Suppress("UNCHECKED_CAST")
-                    return BottomCreateCategoryViewModel(context) as T
-                }
-                throw IllegalArgumentException("Unknown ViewModel class")
+    class BottomCreateCategoryViewModelFactory(private val context: Context) : ViewModelProvider
+    .Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(BottomCreateCategoryViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return BottomCreateCategoryViewModel(context) as T
             }
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
+    }
 }

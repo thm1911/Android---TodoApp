@@ -13,11 +13,13 @@ import com.example.todoapp.Model.CategoryAndTask
 import com.example.todoapp.R
 import kotlinx.coroutines.currentCoroutineContext
 
-class CategoryAdapter(private val onClick: (CategoryAndTask) -> Unit): RecyclerView.Adapter<CategoryAdapter.CategoryViewHodel>() {
+class CategoryAdapter(private val onClick: (CategoryAndTask) -> Unit) :
+    RecyclerView.Adapter<CategoryAdapter.CategoryViewHodel>() {
     private val listCategoryAndTask = mutableListOf<CategoryAndTask>()
     private var showAll: Boolean = true
-    class CategoryViewHodel(view: View): RecyclerView.ViewHolder(view){
-        val nameCategory : TextView = view.findViewById(R.id.name)
+
+    class CategoryViewHodel(view: View) : RecyclerView.ViewHolder(view) {
+        val nameCategory: TextView = view.findViewById(R.id.name)
         val color: View = view.findViewById(R.id.color)
         val totalTask: TextView = view.findViewById(R.id.count)
     }
@@ -26,7 +28,8 @@ class CategoryAdapter(private val onClick: (CategoryAndTask) -> Unit): RecyclerV
         parent: ViewGroup,
         viewType: Int
     ): CategoryViewHodel {
-        val binding = LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)
+        val binding =
+            LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)
         return CategoryViewHodel(binding)
     }
 
@@ -43,17 +46,17 @@ class CategoryAdapter(private val onClick: (CategoryAndTask) -> Unit): RecyclerV
         }
     }
 
-    fun showAllCategory(check: Boolean){
+    fun showAllCategory(check: Boolean) {
         showAll = check
         notifyDataSetChanged()
     }
 
     override fun getItemCount(): Int {
-       if(showAll) return listCategoryAndTask.size
-       else return 2
+        if (showAll) return listCategoryAndTask.size
+        else return minOf(listCategoryAndTask.size, 3)
     }
 
-    fun setData(category: List<CategoryAndTask>){
+    fun setData(category: List<CategoryAndTask>) {
         this.listCategoryAndTask.clear()
         this.listCategoryAndTask.addAll(category)
         notifyDataSetChanged()

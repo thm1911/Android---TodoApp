@@ -22,7 +22,7 @@ class TaskDetailFragment : Fragment() {
     private var _binding: FragmentTaskDetailBinding? = null
     private val binding get() = _binding!!
     private val args: TaskDetailFragmentArgs by navArgs()
-    private val viewModel: TaskDetailViewModel by viewModels(){
+    private val viewModel: TaskDetailViewModel by viewModels() {
         TaskDetailViewModel.TaskDetailViewModelFactory(requireContext())
     }
     private val shareViewModel: ShareViewModel by activityViewModels()
@@ -49,10 +49,9 @@ class TaskDetailFragment : Fragment() {
         val id = args.id
         nameCategory = binding.category.text.toString()
 
-        if(mes == "categoryId") {
+        if (mes == "categoryId") {
             init(shareViewModel.taskId, id)
-        }
-        else if(mes == "taskId") {
+        } else if (mes == "taskId") {
             shareViewModel.taskId = id
             init(id, 0L)
         }
@@ -83,13 +82,13 @@ class TaskDetailFragment : Fragment() {
 
     }
 
-    private fun init(taskId: Long, newCategoryId: Long){
-        if(taskId != 0L) {
+    private fun init(taskId: Long, newCategoryId: Long) {
+        if (taskId != 0L) {
             viewModel.getTaskById(taskId).observe(viewLifecycleOwner) { task ->
                 title = task.title
                 description = task.description
                 isDelete = task.isDelete
-                if(newCategoryId == 0L) categoryId = task.categoryId
+                if (newCategoryId == 0L) categoryId = task.categoryId
                 else categoryId = newCategoryId
                 val timeFormat = SimpleDateFormat("HH:mm", Locale.getDefault())
                 val dateFormat = SimpleDateFormat("EE, dd MMM yyyy", Locale.getDefault())
@@ -110,7 +109,7 @@ class TaskDetailFragment : Fragment() {
         }
     }
 
-    private fun updateCategory(){
+    private fun updateCategory() {
         findNavController().navigate(
             TaskDetailFragmentDirections.actionTaskDetailFragmentToCategoryFragment(
                 "Task Detail"
@@ -118,27 +117,36 @@ class TaskDetailFragment : Fragment() {
         )
     }
 
-    private fun update(taskId: Long){
+    private fun update(taskId: Long) {
         val newTitle = binding.title.text.toString()
-        val newDescription= binding.description.text.toString()
+        val newDescription = binding.description.text.toString()
         val newTime = binding.time.text.toString()
         val newDate = binding.date.text.toString()
         val newNameCategory = binding.category.text.toString()
 
-        if(title == newTitle && description == newDescription && time == newTime && date == newDate && nameCategory == newNameCategory){
+        if (title == newTitle && description == newDescription && time == newTime && date == newDate && nameCategory == newNameCategory) {
             findNavController().popBackStack()
-        }
-        else{
+        } else if (newTitle.isEmpty() || newDescription.isEmpty() || newTime.isEmpty() || newDate.isEmpty() || newNameCategory.isEmpty()) {
+            binding.warningText.visibility = View.VISIBLE
+        } else {
             val date = SimpleDateFormat("EE, dd MMM yyyy HH:mm", Locale.getDefault())
-            val task = Task(taskId,shareViewModel.userId, newTitle, newDescription, categoryId,date.parse("$newDate $newTime"),false)
+            val task = Task(
+                taskId,
+                shareViewModel.userId,
+                newTitle,
+                newDescription,
+                categoryId,
+                date.parse("$newDate $newTime"),
+                false
+            )
             val builder = AlertDialog.Builder(requireContext())
             builder.setTitle("Update")
             builder.setMessage("Are you sure update Task?")
-            builder.setNegativeButton("Ok"){dialog, which ->
+            builder.setNegativeButton("Ok") { dialog, which ->
                 viewModel.updateTask(task)
                 findNavController().popBackStack()
             }
-            builder.setPositiveButton("Cancel"){dialog, which ->
+            builder.setPositiveButton("Cancel") { dialog, which ->
                 dialog.dismiss()
             }
 
@@ -147,17 +155,17 @@ class TaskDetailFragment : Fragment() {
         }
     }
 
-    private fun moveTotrash(id: Long){
+    private fun moveTotrash(id: Long) {
 
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Delete")
         builder.setMessage("The task will be placed in the trash. Do you still want to delete them?")
-        builder.setNegativeButton("OK"){dialog, which ->
+        builder.setNegativeButton("OK") { dialog, which ->
             viewModel.moveToTrash(id)
             findNavController().popBackStack()
         }
 
-        builder.setPositiveButton("Cancel"){dialog, which ->
+        builder.setPositiveButton("Cancel") { dialog, which ->
             dialog.dismiss()
         }
 
