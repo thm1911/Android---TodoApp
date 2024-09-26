@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
@@ -34,6 +36,7 @@ class TaskHomeFragment : Fragment() {
     }
     private val shareViewModel: ShareViewModel by activityViewModels()
     private val args: TaskHomeFragmentArgs by navArgs()
+    private val custom = listOf("No Sort", "Sort Date A-Z", "Sort Date Z-A")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,6 +50,7 @@ class TaskHomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
+        customList()
 
         binding.createTask.setOnClickListener {
             findNavController().navigate(
@@ -179,6 +183,42 @@ class TaskHomeFragment : Fragment() {
                 task.title.lowercase().contains(query.lowercase())
             }
             (binding.recyclerView.adapter as TaskAdapter).setData(filterList)
+        }
+    }
+
+    private fun customList(){
+        val customAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, custom)
+        customAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinner.adapter = customAdapter
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when(position){
+                    0 ->{
+                        viewModel.listTask.observe(viewLifecycleOwner){task ->
+                            (binding.recyclerView.adapter as TaskAdapter).setData(task)
+                        }
+                    }
+
+                    1 -> {
+                        viewModel.listTask.observe(viewLifecycleOwner){task ->
+                            val sortedList = task.sortedBy { it.dueDate }
+                            (binding.recyclerView.adapter as TaskAdapter).setData(sortedList)
+                        }
+                    }
+
+                    2 ->{
+                        viewModel.listTask.observe(viewLifecycleOwner){task ->
+                            val sortedList = task.sortedByDescending{ it.dueDate }
+                            (binding.recyclerView.adapter as TaskAdapter).setData(sortedList)
+                        }
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
         }
     }
 
