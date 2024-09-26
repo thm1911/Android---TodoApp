@@ -32,4 +32,7 @@ interface UserDAO {
 
     @Query("SELECT id FROM User WHERE username = :userName")
     suspend fun getId(userName: String): Long
+
+    @Query("SELECT * FROM User WHERE id = :id")
+    fun getUserById(id: Long): LiveData<User>
 }

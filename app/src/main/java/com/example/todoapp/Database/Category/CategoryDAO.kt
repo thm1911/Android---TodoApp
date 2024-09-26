@@ -11,7 +11,7 @@ import com.example.todoapp.Model.CategoryAndTask
 import com.example.todoapp.Model.Task
 
 @Dao
-interface CategoryDAO{
+interface CategoryDAO {
     @Query("SELECT * FROM Category WHERE userId = :userId")
     fun getAllCategory(userId: Long): LiveData<List<Category>>
 

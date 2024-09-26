@@ -68,7 +68,8 @@ class HomepageChooseThemeFragment : Fragment() {
             if (check) {
                 viewModel.setTheme(username, theme)
                 findNavController().navigate(
-                    HomepageChooseThemeFragmentDirections.actionHomepageChooseThemeFragmentToMainAppFragment(), navOption
+                    HomepageChooseThemeFragmentDirections.actionHomepageChooseThemeFragmentToMainAppFragment(),
+                    navOption
                 )
             } else {
                 binding.warning.visibility = View.VISIBLE

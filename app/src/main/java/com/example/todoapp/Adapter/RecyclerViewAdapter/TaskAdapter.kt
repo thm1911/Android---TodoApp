@@ -12,28 +12,31 @@ import com.example.todoapp.Model.Task
 import com.example.todoapp.R
 import java.util.Locale
 
-class TaskAdapter(private val onClick: (Task) -> Unit): RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
+class TaskAdapter(private val onClick: (Task) -> Unit) :
+    RecyclerView.Adapter<TaskAdapter.TaskViewHolder>() {
     private val tasks = mutableListOf<Task>()
     private var themeTask: Int = 0
     private var showAll: Boolean = true
-    class TaskViewHolder(view: View): RecyclerView.ViewHolder(view){
-        val theme: TextView = view.findViewById(R.id.theme)
+
+    class TaskViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+        val theme: View = view.findViewById(R.id.theme)
         val title: TextView = view.findViewById(R.id.title)
         val time: TextView = view.findViewById(R.id.time)
         val date: TextView = view.findViewById(R.id.date)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
-        val binding = LayoutInflater.from(parent.context).inflate(R.layout.fragment_task_item, parent, false)
+        val binding =
+            LayoutInflater.from(parent.context).inflate(R.layout.fragment_task_item, parent, false)
         return TaskViewHolder(binding)
     }
 
     override fun getItemCount(): Int {
         if (showAll) return tasks.size
-        else return 2
+        else return minOf(tasks.size, 3)
     }
 
-    fun showAllTask(check: Boolean){
+    fun showAllTask(check: Boolean) {
         showAll = check
         notifyDataSetChanged()
     }
@@ -53,19 +56,20 @@ class TaskAdapter(private val onClick: (Task) -> Unit): RecyclerView.Adapter<Tas
         }
     }
 
-    fun setTheme(theme: Int){
+    fun setTheme(theme: Int) {
         themeTask = theme
         notifyDataSetChanged()
     }
 
-    fun setData(tasks: List<Task>){
+    fun setData(tasks: List<Task>) {
         val result = DiffUtil.calculateDiff(TaskDiffUtilCallBack(this.tasks, tasks))
         this.tasks.clear()
         this.tasks.addAll(tasks)
         result.dispatchUpdatesTo(this)
     }
 
-    class TaskDiffUtilCallBack(private val oldList: List<Task>, private val newList: List<Task>): DiffUtil.Callback(){
+    class TaskDiffUtilCallBack(private val oldList: List<Task>, private val newList: List<Task>) :
+        DiffUtil.Callback() {
         override fun getOldListSize(): Int {
             return oldList.size
         }

@@ -8,13 +8,14 @@ import com.example.todoapp.UI.Onboarding.Onboarding1Fragment
 import com.example.todoapp.UI.Onboarding.Onboarding2Fragment
 import com.example.todoapp.UI.Onboarding.Onboarding3Fragment
 
-class FragmentOnboardingAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle): FragmentStateAdapter(fragmentManager, lifecycle) {
+class FragmentOnboardingAdapter(fragmentManager: FragmentManager, lifecycle: Lifecycle) :
+    FragmentStateAdapter(fragmentManager, lifecycle) {
     override fun getItemCount(): Int {
         return 3
     }
 
     override fun createFragment(position: Int): Fragment {
-        return when(position){
+        return when (position) {
             0 -> Onboarding1Fragment()
             1 -> Onboarding2Fragment()
             else -> Onboarding3Fragment()

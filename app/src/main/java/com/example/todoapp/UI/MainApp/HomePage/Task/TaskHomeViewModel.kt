@@ -13,12 +13,13 @@ import com.example.todoapp.Model.Task
 import com.example.todoapp.UI.ShareViewModel
 import kotlinx.coroutines.launch
 
-class TaskHomeViewModel(shareViewModel: ShareViewModel, context: Context): ViewModel() {
+class TaskHomeViewModel(shareViewModel: ShareViewModel, context: Context) : ViewModel() {
     private val taskRepository: TaskRepository
     private val userRepository: UserRepository
     private val categoryRepository: CategoryRepository
     var listTask: LiveData<List<Task>>
-    init{
+
+    init {
         taskRepository = TaskRepository(context)
         userRepository = UserRepository(context)
         categoryRepository = CategoryRepository(context)
@@ -35,17 +36,21 @@ class TaskHomeViewModel(shareViewModel: ShareViewModel, context: Context): ViewM
         categoryRepository.deleteCategory(category)
     }
 
-    fun getTaskByCategory(categoryId: Long, userId: Long) = taskRepository.getTaskByCategory(categoryId, userId)
+    fun getTaskByCategory(categoryId: Long, userId: Long) =
+        taskRepository.getTaskByCategory(categoryId, userId)
 
     fun getCategoryById(id: Long) = categoryRepository.getCategoryById(id)
-    class TaskHomeViewModelFactory(private val shareViewModel: ShareViewModel, private val context: Context): ViewModelProvider
-    .Factory{
-            override fun <T: ViewModel> create (modelClass: Class<T>): T{
-                if(modelClass.isAssignableFrom(TaskHomeViewModel::class.java)){
-                    @Suppress("UNCHECKED_CAST")
-                    return TaskHomeViewModel(shareViewModel, context) as T
-                }
-                throw IllegalArgumentException("Unknown ViewModel class")
+    class TaskHomeViewModelFactory(
+        private val shareViewModel: ShareViewModel,
+        private val context: Context
+    ) : ViewModelProvider
+    .Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(TaskHomeViewModel::class.java)) {
+                @Suppress("UNCHECKED_CAST")
+                return TaskHomeViewModel(shareViewModel, context) as T
             }
+            throw IllegalArgumentException("Unknown ViewModel class")
         }
+    }
 }

@@ -22,7 +22,7 @@ import java.util.Locale
 class CreateTaskFragment : Fragment() {
     private var _binding: FragmentCreateTaskBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: CreateTaskViewModel by viewModels(){
+    private val viewModel: CreateTaskViewModel by viewModels() {
         CreateTaskViewModel.CreateTaskViewModelFactory(requireContext())
     }
     private val shareViewModel: ShareViewModel by activityViewModels()
@@ -40,7 +40,7 @@ class CreateTaskFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mes = args.mes
         val categoryId = args.id
-        if(categoryId != 0L && mes == "categoryId") {
+        if (categoryId != 0L && mes == "categoryId") {
             viewModel.getCategoryById(categoryId).observe(viewLifecycleOwner) { category ->
                 val name = category.name
                 binding.categoryText.setText(name)
@@ -86,7 +86,7 @@ class CreateTaskFragment : Fragment() {
     }
 
 
-    private fun selectCategory(){
+    private fun selectCategory() {
         findNavController().navigate(
             CreateTaskFragmentDirections.actionCreateTaskFragmentToCategoryFragment(
                 "Create Task"
@@ -94,20 +94,20 @@ class CreateTaskFragment : Fragment() {
         )
     }
 
-    private fun insertTask(categoryId: Long){
+    private fun insertTask(categoryId: Long) {
         val title = binding.title.text.toString()
         val description = binding.description.text.toString()
         val timeText = binding.timeText.text.toString()
         val dateText = binding.dateText.text.toString()
+        val categoryText = binding.categoryText.text.toString()
 
-        if(title.isEmpty() || description.isEmpty() || timeText == "Add Time" || dateText == "add Text" ){
+        if (title.isEmpty() || description.isEmpty() || timeText == "Add Time" || dateText == "Add Date" || categoryText == "Add Category") {
             binding.warningText.visibility = View.VISIBLE
-        }
-        else{
+        } else {
             binding.warningText.visibility = View.INVISIBLE
             val date = convert(timeText, dateText)
             val userId = shareViewModel.userId
-            val task = Task(0, userId, title, description, categoryId,date,false)
+            val task = Task(0, userId, title, description, categoryId, date, false)
 
             viewModel.addTask(task)
             findNavController().popBackStack()

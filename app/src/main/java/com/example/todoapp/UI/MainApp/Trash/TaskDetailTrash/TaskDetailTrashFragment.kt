@@ -20,7 +20,7 @@ import java.util.Locale
 class TaskDetailTrashFragment : Fragment() {
     private var _binding: FragmentTaskDetailTrashBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: TaskDetailTrashViewModel by viewModels(){
+    private val viewModel: TaskDetailTrashViewModel by viewModels() {
         TaskDetailTrashViewModel.TaskDetailTrashViewModelFactory(requireContext())
     }
     private val args: TaskDetailTrashFragmentArgs by navArgs()
@@ -43,7 +43,7 @@ class TaskDetailTrashFragment : Fragment() {
         var date = ""
         var category = 0L
 
-        viewModel.getTaskById(id).observe(viewLifecycleOwner){task ->
+        viewModel.getTaskById(id).observe(viewLifecycleOwner) { task ->
             title = task.title
             description = task.description
             category = task.categoryId
@@ -58,7 +58,7 @@ class TaskDetailTrashFragment : Fragment() {
             binding.time.setText(time)
             binding.date.setText(date)
 
-            viewModel.getCategoryById(category).observe(viewLifecycleOwner){category ->
+            viewModel.getCategoryById(category).observe(viewLifecycleOwner) { category ->
                 binding.category.setText(category.name)
             }
         }
@@ -77,15 +77,15 @@ class TaskDetailTrashFragment : Fragment() {
 
     }
 
-    private fun restore(id: Long){
+    private fun restore(id: Long) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Restore Task")
         builder.setMessage("Are you sure you want to restore Task?")
-        builder.setNegativeButton("OK"){dialog, which ->
+        builder.setNegativeButton("OK") { dialog, which ->
             viewModel.restoreTask(id)
             findNavController().popBackStack()
         }
-        builder.setPositiveButton("Cancel"){dialog, which ->
+        builder.setPositiveButton("Cancel") { dialog, which ->
             dialog.dismiss()
         }
 
