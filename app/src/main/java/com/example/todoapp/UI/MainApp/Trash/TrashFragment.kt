@@ -49,6 +49,8 @@ class TrashFragment : Fragment() {
 
         viewModel.listDeleteTask.observe(viewLifecycleOwner) { task ->
             adapter.setData(task)
+            if(task.size == 0) binding.noTask.visibility = View.VISIBLE
+            else binding.noTask.visibility = View.INVISIBLE
         }
 
         val space = resources.getDimensionPixelSize(R.dimen.space)
