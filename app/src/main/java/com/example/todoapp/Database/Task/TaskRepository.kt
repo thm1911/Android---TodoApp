@@ -7,9 +7,11 @@ import com.example.todoapp.Model.Task
 
 class TaskRepository(context: Context) {
     private val taskDAO: TaskDAO
+
     init {
         taskDAO = TodoDatabase.getInstance(context).taskDAO()
     }
+
     fun getAllTask(userId: Long): LiveData<List<Task>> = taskDAO.getAllTask(userId)
     fun getAllDeleteTask(userId: Long): LiveData<List<Task>> = taskDAO.getAllDeleteTask(userId)
     suspend fun getAllRestore(userId: Long) = taskDAO.getAllRestore(userId)
@@ -19,5 +21,6 @@ class TaskRepository(context: Context) {
     suspend fun updateTask(task: Task) = taskDAO.updateTask(task)
     suspend fun deleteTask(id: Long) = taskDAO.deleteTask(id)
     fun getTaskById(id: Long): LiveData<Task> = taskDAO.getTaskById(id)
-    fun getTaskByCategory(categoryId: Long, userId: Long): LiveData<List<Task>> = taskDAO.getAllTaskByCategory(categoryId, userId)
+    fun getTaskByCategory(categoryId: Long, userId: Long): LiveData<List<Task>> =
+        taskDAO.getAllTaskByCategory(categoryId, userId)
 }

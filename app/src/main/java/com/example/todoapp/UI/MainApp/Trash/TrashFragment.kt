@@ -19,7 +19,7 @@ import com.example.todoapp.databinding.FragmentTrashBinding
 class TrashFragment : Fragment() {
     private var _binding: FragmentTrashBinding? = null
     private val binding get() = _binding!!
-    private val viewModel: TrashViewModel by viewModels{
+    private val viewModel: TrashViewModel by viewModels {
         TrashViewModel.TrashViewModelFactory(shareViewModel, requireContext())
     }
     private val shareViewModel: ShareViewModel by activityViewModels()
@@ -35,20 +35,27 @@ class TrashFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val recyclerView = binding.recyclerView
-        val adapter = TaskAdapter{ task ->
+        val adapter = TaskAdapter { task ->
             val id = task.id
-            findNavController().navigate(TrashFragmentDirections.actionTrashFragmentToTaskDetailTrashFragment(id))
+            findNavController().navigate(
+                TrashFragmentDirections.actionTrashFragmentToTaskDetailTrashFragment(
+                    id
+                )
+            )
         }
         recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
 
-        viewModel.listDeleteTask.observe(viewLifecycleOwner){task ->
+        viewModel.listDeleteTask.observe(viewLifecycleOwner) { task ->
             adapter.setData(task)
+            if(task.size == 0) binding.noTask.visibility = View.VISIBLE
+            else binding.noTask.visibility = View.INVISIBLE
         }
 
         val space = resources.getDimensionPixelSize(R.dimen.space)
         recyclerView.addItemDecoration(SpacingItem(space))
-        viewModel.getTheme(shareViewModel.userId){theme ->
+        viewModel.getTheme(shareViewModel.userId) { theme ->
             adapter.setTheme(theme)
         }
 
@@ -57,15 +64,15 @@ class TrashFragment : Fragment() {
         }
     }
 
-    private fun restoreAll(){
+    private fun restoreAll() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Restore All task")
         builder.setMessage("Are you sure you want to restore them all?")
-        builder.setPositiveButton("OK"){dialog, which ->
+        builder.setPositiveButton("OK") { dialog, which ->
             viewModel.getAllRestore()
             dialog.dismiss()
         }
-        builder.setNegativeButton("Cancel"){dialog, which ->
+        builder.setNegativeButton("Cancel") { dialog, which ->
             dialog.dismiss()
         }
 

@@ -11,10 +11,11 @@ import com.example.todoapp.Database.Task.TaskRepository
 import com.example.todoapp.Model.Task
 import kotlinx.coroutines.launch
 
-class TaskDetailTrashViewModel(context: Context): ViewModel() {
+class TaskDetailTrashViewModel(context: Context) : ViewModel() {
     private val taskRepository: TaskRepository
     private val categoryRepository: CategoryRepository
-    init{
+
+    init {
         taskRepository = TaskRepository(context)
         categoryRepository = CategoryRepository(context)
     }
@@ -31,10 +32,10 @@ class TaskDetailTrashViewModel(context: Context): ViewModel() {
 
     fun getCategoryById(categoryId: Long) = categoryRepository.getCategoryById(categoryId)
 
-    class TaskDetailTrashViewModelFactory(private val context: Context): ViewModelProvider
-    .Factory{
-        override fun <T: ViewModel> create (modelClass: Class<T>): T{
-            if(modelClass.isAssignableFrom(TaskDetailTrashViewModel::class.java)){
+    class TaskDetailTrashViewModelFactory(private val context: Context) : ViewModelProvider
+    .Factory {
+        override fun <T : ViewModel> create(modelClass: Class<T>): T {
+            if (modelClass.isAssignableFrom(TaskDetailTrashViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
                 return TaskDetailTrashViewModel(context) as T
             }

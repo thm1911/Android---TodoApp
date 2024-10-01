@@ -9,7 +9,7 @@ import androidx.room.Update
 import com.example.todoapp.Model.Task
 
 @Dao
-interface TaskDAO{
+interface TaskDAO {
     @Query("SELECT * FROM Task WHERE isDelete = 0 AND userId = :userId")
     fun getAllTask(userId: Long): LiveData<List<Task>>
 

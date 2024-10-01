@@ -7,8 +7,9 @@ import com.example.todoapp.Database.TodoDatabase
 import com.example.todoapp.Model.Category
 import com.example.todoapp.Model.CategoryAndTask
 
-class CategoryRepository(context: Context){
+class CategoryRepository(context: Context) {
     private val categoryDAO: CategoryDAO
+
     init {
         categoryDAO = TodoDatabase.getInstance(context).categoryDAO()
     }
@@ -19,5 +20,6 @@ class CategoryRepository(context: Context){
     suspend fun deleteCategory(category: Category) = categoryDAO.deleteCategory(category)
     fun getCategoryById(id: Long): LiveData<Category> = categoryDAO.getCategoryById(id)
     suspend fun isNameExists(name: String, userId: Long) = categoryDAO.isNameExists(name, userId)
-    fun getAllCategoryAndTask(userId: Long): LiveData<List<CategoryAndTask>> = categoryDAO.getAllCategoryAndTask(userId)
+    fun getAllCategoryAndTask(userId: Long): LiveData<List<CategoryAndTask>> =
+        categoryDAO.getAllCategoryAndTask(userId)
 }

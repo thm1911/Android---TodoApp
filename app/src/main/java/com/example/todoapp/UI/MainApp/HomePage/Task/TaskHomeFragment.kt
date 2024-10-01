@@ -5,7 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
@@ -33,6 +36,7 @@ class TaskHomeFragment : Fragment() {
     }
     private val shareViewModel: ShareViewModel by activityViewModels()
     private val args: TaskHomeFragmentArgs by navArgs()
+    private val custom = listOf("No Sort", "Sort Date A-Z", "Sort Date Z-A")
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,9 +50,15 @@ class TaskHomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         initRecyclerView()
+        customList()
 
         binding.createTask.setOnClickListener {
-            findNavController().navigate(TaskHomeFragmentDirections.actionTaskHomeFragmentToCreateTaskFragment(0L, "taskId"))
+            findNavController().navigate(
+                TaskHomeFragmentDirections.actionTaskHomeFragmentToCreateTaskFragment(
+                    0L,
+                    "taskId"
+                )
+            )
         }
 
         binding.back.setOnClickListener {
@@ -84,75 +94,132 @@ class TaskHomeFragment : Fragment() {
             viewModel.listTask.observe(viewLifecycleOwner) { task ->
                 adapter.setData(task)
             }
-        }
-
-        else if(mes == "category"){
+        } else if (mes == "category") {
             update(id)
             var count: Int = 0
             viewModel.listTask = viewModel.getTaskByCategory(id, shareViewModel.userId)
-            viewModel.listTask.observe(viewLifecycleOwner){task ->
+            viewModel.listTask.observe(viewLifecycleOwner) { task ->
                 count = task.size
                 adapter.setData(task)
             }
-            binding.deleteCategory.setOnClickListener{
-                if(count == 0) showDialog("Are you sure you want to delete Category", true)
+            binding.deleteCategory.setOnClickListener {
+                if (count == 0) showDialog("Are you sure you want to delete Category", true)
                 else showDialog("You cannot delete this category", false)
             }
         }
 
-        viewModel.getTheme(shareViewModel.userId){theme ->
+        viewModel.getTheme(shareViewModel.userId) { theme ->
             adapter.setTheme(theme)
         }
 
         binding.layout.setOnClickListener {
             isLinearLayout = !isLinearLayout
-            if(isLinearLayout){
+            if (isLinearLayout) {
                 shareViewModel.isLinearLayout = true
                 recyclerView.layoutManager = linearLayoutManager
                 binding.layout.setBackgroundResource(R.drawable.ic_linear_layout)
-            }
-            else{
+            } else {
                 shareViewModel.isLinearLayout = false
                 recyclerView.layoutManager = gridLayoutManager
                 binding.layout.setBackgroundResource(R.drawable.ic_grid_layout)
             }
         }
 
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filterList(newText)
+                return true
+            }
+
+        })
+
     }
 
-    private fun update(id: Long){
+    private fun update(id: Long) {
         binding.createTask.visibility = View.INVISIBLE
-        viewModel.getCategoryById(id).observe(viewLifecycleOwner){category ->
+        viewModel.getCategoryById(id).observe(viewLifecycleOwner) { category ->
             binding.text.setText(category.name)
         }
         binding.deleteCategory.visibility = View.VISIBLE
     }
 
-    private fun showDialog(mes: String, check: Boolean){
+    private fun showDialog(mes: String, check: Boolean) {
         val builder = AlertDialog.Builder(requireContext())
         builder.setTitle("Delete Category")
         builder.setMessage(mes)
-        builder.setNegativeButton("OK"){dialog, which ->
-            if (check){
+        builder.setNegativeButton("OK") { dialog, which ->
+            if (check) {
                 var name: String = ""
                 var color: String = ""
-                viewModel.getCategoryById(args.categoryId).observe(viewLifecycleOwner){category ->
+                viewModel.getCategoryById(args.categoryId).observe(viewLifecycleOwner) { category ->
                     name = category.name
                     color = category.color
                 }
-                viewModel.delete(Category(args.categoryId,shareViewModel.userId, name, color))
+                viewModel.delete(Category(args.categoryId, shareViewModel.userId, name, color))
                 findNavController().popBackStack()
-            }
-            else dialog.dismiss()
+            } else dialog.dismiss()
         }
-        if(check){
-            builder.setPositiveButton("Cancel"){dialog, which ->
+        if (check) {
+            builder.setPositiveButton("Cancel") { dialog, which ->
                 dialog.dismiss()
             }
         }
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+    private fun filterList(query: String?) {
+        val list = viewModel.listTask.value ?: emptyList()
+
+        if (query.isNullOrEmpty()) {
+            (binding.recyclerView.adapter as TaskAdapter).setData(list)
+        } else {
+            val filterList = list.filter { task ->
+                task.title.lowercase().contains(query.lowercase())
+            }
+            (binding.recyclerView.adapter as TaskAdapter).setData(filterList)
+        }
+    }
+
+    private fun customList(){
+        val customAdapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, custom)
+        customAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinner.adapter = customAdapter
+        binding.spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener{
+            override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+                when(position){
+                    0 ->{
+                        viewModel.listTask.observe(viewLifecycleOwner){task ->
+                            (binding.recyclerView.adapter as TaskAdapter).setData(task)
+                        }
+                    }
+
+                    1 -> {
+                        viewModel.listTask.observe(viewLifecycleOwner){task ->
+                            val sortedList = task.sortedBy { it.dueDate }
+                            (binding.recyclerView.adapter as TaskAdapter).setData(sortedList)
+                        }
+                    }
+
+                    2 ->{
+                        viewModel.listTask.observe(viewLifecycleOwner){task ->
+                            val sortedList = task.sortedByDescending{ it.dueDate }
+                            (binding.recyclerView.adapter as TaskAdapter).setData(sortedList)
+                        }
+                    }
+                }
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+                TODO("Not yet implemented")
+            }
+
+        }
     }
 
     override fun onDestroyView() {

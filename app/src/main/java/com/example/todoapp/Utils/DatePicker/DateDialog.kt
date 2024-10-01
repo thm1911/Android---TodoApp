@@ -11,16 +11,16 @@ import java.text.SimpleDateFormat
 import java.util.Locale
 
 class DateDialog {
-    companion object{
-        fun selectDate(context: Context, view: TextView){
-            val calendar =  Calendar.getInstance()
+    companion object {
+        fun selectDate(context: Context, view: TextView) {
+            val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
             val month = calendar.get(Calendar.MONTH)
             val day = calendar.get(Calendar.DAY_OF_MONTH)
 
             val datePickerDialog = DatePickerDialog(
-                context,{
-                        _: DatePicker, selectYear: Int, selectMonth: Int, selectDay: Int ->
+                context,
+                { _: DatePicker, selectYear: Int, selectMonth: Int, selectDay: Int ->
                     val date = formatDate(selectYear, selectMonth, selectDay)
                     view.setText(date)
                 },
@@ -32,7 +32,7 @@ class DateDialog {
             return datePickerDialog.show()
         }
 
-        private fun formatDate(year: Int, month: Int, day: Int): String{
+        private fun formatDate(year: Int, month: Int, day: Int): String {
             val calendar = Calendar.getInstance().apply {
                 set(Calendar.YEAR, year)
                 set(Calendar.MONTH, month)

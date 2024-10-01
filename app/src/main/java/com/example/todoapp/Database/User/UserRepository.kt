@@ -1,6 +1,7 @@
 package com.example.todoapp.Database.User
 
 import android.content.Context
+import androidx.lifecycle.LiveData
 import com.example.todoapp.Database.TodoDatabase
 import com.example.todoapp.Model.User
 
@@ -20,7 +21,9 @@ class UserRepository(context: Context) {
         val check = userDAO.checkUser(username, password)
         return check > 0
     }
+
     suspend fun setTheme(username: String, theme: Int) = userDAO.setTheme(username, theme)
     suspend fun getTheme(id: Long) = userDAO.getTheme(id)
     suspend fun getId(userName: String) = userDAO.getId(userName)
+    fun getUserById(id: Long): LiveData<User> = userDAO.getUserById(id)
 }

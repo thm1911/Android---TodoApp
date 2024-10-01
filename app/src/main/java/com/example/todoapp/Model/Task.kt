@@ -5,7 +5,8 @@ import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 import java.util.Date
 
-@Entity(tableName = "Task",
+@Entity(
+    tableName = "Task",
     foreignKeys = [
         ForeignKey(
             entity = User::class,
@@ -22,7 +23,7 @@ import java.util.Date
     ]
 )
 data class Task(
-    @PrimaryKey(autoGenerate = true) val id: Long = 0,
+    @PrimaryKey(autoGenerate = true) var id: Long = 0,
     val userId: Long,
     val title: String,
     val description: String,
