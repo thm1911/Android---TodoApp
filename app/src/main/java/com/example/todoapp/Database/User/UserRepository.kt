@@ -14,7 +14,7 @@ class UserRepository(context: Context) {
     }
 
     suspend fun insertUser(user: User) = userDAO.insertUser(user)
-    fun updatePassword(id: Long, newPass: String) = userDAO.updatePassword(id, newPass)
+    suspend fun updatePassword(id: Long, newPass: String) = userDAO.updatePassword(id, newPass)
     suspend fun isEmailExist(email: String) = userDAO.isEmailExist(email)
     suspend fun isUsernameExist(username: String) = userDAO.isUsernameExist(username)
     suspend fun checkUser(username: String, password: String): Boolean {
