@@ -8,17 +8,29 @@
     tools:context=".UI.MainApp.HomePage.HomeFragment">
 
     <View
+        android:id="@+id/view"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/edit_text"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintHeight_percent="0.1"
+        app:layout_constraintStart_toStartOf="@id/guideline1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.05" />
+
+    <View
         android:id="@+id/image"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:background="@drawable/ic_person"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/view"
         app:layout_constraintDimensionRatio="1:1"
-        app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layout_constraintEnd_toEndOf="@id/view"
         app:layout_constraintHeight_percent="0.1"
         app:layout_constraintHorizontal_bias="0"
-        app:layout_constraintStart_toStartOf="@id/guideline1"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="@id/view"
+        app:layout_constraintTop_toTopOf="@id/view"
         app:layout_constraintVertical_bias="0.05" />
 
     <TextView
@@ -30,7 +42,7 @@
         android:textColor="@color/black"
         android:textSize="15sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/view"
         app:layout_constraintHeight_percent="0.05"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toTopOf="@id/image" />
@@ -42,7 +54,7 @@
         android:text="abc@gmail.com"
         android:textColor="@color/black"
         app:layout_constraintBottom_toBottomOf="@id/image"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/view"
         app:layout_constraintStart_toEndOf="@id/image"
         app:layout_constraintTop_toBottomOf="@id/username" />
 
@@ -50,7 +62,7 @@
         android:id="@+id/category"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeMaxTextSize="30sp"
+        android:autoSizeMaxTextSize="25sp"
         android:autoSizeMinTextSize="20sp"
         android:autoSizeTextType="uniform"
         android:gravity="center|start"
@@ -70,6 +82,9 @@
         android:id="@+id/view_all_category"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autoSizeMaxTextSize="17sp"
+        android:autoSizeMinTextSize="15sp"
+        android:autoSizeTextType="uniform"
         android:gravity="center|end"
         android:text="@string/view_all"
         android:textColor="@color/main"
@@ -96,7 +111,7 @@
         android:id="@+id/task"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:autoSizeMaxTextSize="30sp"
+        android:autoSizeMaxTextSize="25sp"
         android:autoSizeMinTextSize="20sp"
         android:autoSizeTextType="uniform"
         android:gravity="center|start"
@@ -116,6 +131,9 @@
         android:id="@+id/view_all_task"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autoSizeMaxTextSize="17sp"
+        android:autoSizeMinTextSize="15sp"
+        android:autoSizeTextType="uniform"
         android:gravity="center|end"
         android:text="@string/view_all"
         android:textColor="@color/main"

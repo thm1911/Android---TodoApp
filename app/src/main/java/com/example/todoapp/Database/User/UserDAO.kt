@@ -13,7 +13,7 @@ interface UserDAO {
     suspend fun insertUser(user: User): Long
 
     @Query("UPDATE User SET password = :newPassword WHERE id = :id")
-    fun updatePassword(id: Long, newPassword: String)
+    suspend fun updatePassword(id: Long, newPassword: String)
 
     @Query("SELECT EXISTS(SELECT 1 FROM User WHERE email = :email)")
     suspend fun isEmailExist(email: String): Boolean
