@@ -65,5 +65,6 @@
     <string name="cancel">Cancel</string>
     <string name="save">Save</string>
     <string name="choose_theme_task">Choose theme task</string>
+    <string name="progress">Progress:</string>
 
 </resources>

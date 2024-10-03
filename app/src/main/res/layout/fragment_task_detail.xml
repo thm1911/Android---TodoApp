@@ -51,11 +51,10 @@
         app:layout_constraintTop_toTopOf="@id/back" />
 
     <View
-        android:id="@+id/restore"
+        android:id="@+id/done"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:background="@drawable/ic_restore"
-        android:visibility="invisible"
+        android:background="@drawable/ic_done"
         app:layout_constraintBottom_toBottomOf="@id/back"
         app:layout_constraintDimensionRatio="1:1"
         app:layout_constraintEnd_toStartOf="@id/delete"

@@ -107,7 +107,7 @@ class CreateTaskFragment : Fragment() {
             binding.warningText.visibility = View.INVISIBLE
             val date = convert(timeText, dateText)
             val userId = shareViewModel.userId
-            val task = Task(0, userId, title, description, categoryId, date, false)
+            val task = Task(0, userId, title, description, categoryId, date, false, false)
 
             viewModel.addTask(task)
             findNavController().popBackStack()

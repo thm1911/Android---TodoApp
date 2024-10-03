@@ -5,6 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
@@ -22,6 +23,8 @@ class CategoryAdapter(private val onClick: (CategoryAndTask) -> Unit) :
         val nameCategory: TextView = view.findViewById(R.id.name)
         val color: View = view.findViewById(R.id.color)
         val totalTask: TextView = view.findViewById(R.id.count)
+        val progress: TextView = view.findViewById(R.id.progress)
+        val progressBar: ProgressBar = view.findViewById(R.id.progressBar)
     }
 
     override fun onCreateViewHolder(
@@ -40,6 +43,9 @@ class CategoryAdapter(private val onClick: (CategoryAndTask) -> Unit) :
         val color = curCategory.color
         holder.color.setBackgroundColor(Color.parseColor(color))
         holder.totalTask.text = "${curCategory.totalTask} Tasks"
+        val progress = (curCategory.taskIsDone.toFloat() / curCategory.totalTask) * 100
+        holder.progress.setText(String.format("%d%%", progress.toInt()))
+        holder.progressBar.setProgress(progress.toInt())
 
         holder.itemView.setOnClickListener {
             onClick(curCategory)

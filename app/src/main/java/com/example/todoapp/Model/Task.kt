@@ -30,4 +30,5 @@ data class Task(
     val categoryId: Long,
     val dueDate: Date,
     val isDelete: Boolean,
+    val isDone: Boolean
 )

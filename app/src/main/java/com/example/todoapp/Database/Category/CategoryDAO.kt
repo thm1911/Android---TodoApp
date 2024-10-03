@@ -30,7 +30,7 @@ interface CategoryDAO {
     @Query("SELECT EXISTS(SELECT 1 FROM Category WHERE name = :name AND userId = :userId)")
     suspend fun isNameExists(name: String, userId: Long): Boolean
 
-    @Query("SELECT Category.id as id, Category.name as nameCategory, Category.color as color, Count(Task.id) as totalTask FROM Category LEFT JOIN Task ON Category.id = Task.categoryId AND Task.isDelete = 0 WHERE Category.userId = :userId GROUP BY Category.id")
+    @Query("SELECT Category.id as id, Category.name as nameCategory, Category.color as color, Count(Task.id) as totalTask, Count(CASE WHEN Task.isDone = 1 THEN 1 END) as taskIsDone FROM Category LEFT JOIN Task ON Category.id = Task.categoryId AND Task.isDelete = 0 WHERE Category.userId = :userId GROUP BY Category.id")
     fun getAllCategoryAndTask(userId: Long): LiveData<List<CategoryAndTask>>
 
 }

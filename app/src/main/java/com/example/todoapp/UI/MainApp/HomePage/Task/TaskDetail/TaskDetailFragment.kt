@@ -76,6 +76,12 @@ class TaskDetailFragment : Fragment() {
             findNavController().popBackStack()
         }
 
+        binding.done.setOnClickListener {
+            viewModel.doneTask(id)
+            findNavController().popBackStack()
+        }
+
+
         binding.delete.setOnClickListener {
             moveTotrash(id)
         }
@@ -137,6 +143,7 @@ class TaskDetailFragment : Fragment() {
                 newDescription,
                 categoryId,
                 date.parse("$newDate $newTime"),
+                false,
                 false
             )
             val builder = AlertDialog.Builder(requireContext())
