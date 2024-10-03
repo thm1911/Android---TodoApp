@@ -22,6 +22,9 @@ interface TaskDAO {
     @Query("UPDATE Task SET isDelete = 0 AND userId = :userId")
     suspend fun getAllRestore(userId: Long)
 
+    @Query("UPDATE Task SET isDone = 1 WHERE id = :id")
+    suspend fun doneTask(id: Long)
+
     @Query("UPDATE TASK SET isDelete = 0 WHERE id = :id")
     suspend fun restoreTask(id: Long)
 
