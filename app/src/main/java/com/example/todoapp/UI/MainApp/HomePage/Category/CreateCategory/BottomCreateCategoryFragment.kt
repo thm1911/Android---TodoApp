@@ -63,25 +63,34 @@ class BottomCreateCategoryFragment() : BottomSheetDialogFragment() {
             .create()
 
         val gridLayout = colorDialogView.findViewById<GridLayout>(R.id.gridColor)
+        gridLayout.removeAllViews()
 
-        listColor.forEach { color ->
-            val colorButton = View(requireContext()).apply {
-                layoutParams = GridLayout.LayoutParams().apply {
-                    width = 170
-                    height = 170
-                    setMargins(20, 20, 20, 20)
-                }
-                setBackgroundColor(Color.parseColor(color))
-                setOnClickListener {
-                    binding.color.setBackgroundColor(Color.parseColor(color))
-                    binding.hex.setText(color)
-                    colorDialog.cancel()
+        colorDialogView.viewTreeObserver.addOnGlobalLayoutListener {
+            val widthView = gridLayout.width
+            val columnCount = 4
+            val cellWidth = widthView / columnCount
+
+            if (gridLayout.childCount == 0) {
+                listColor.forEach { color ->
+                    val colorButton = View(requireContext()).apply {
+                        layoutParams = GridLayout.LayoutParams().apply {
+                            width = cellWidth - 40
+                            height = cellWidth - 40
+                            setMargins(20, 20, 20, 20)
+                        }
+                        setBackgroundColor(Color.parseColor(color))
+                        setOnClickListener {
+                            binding.color.setBackgroundColor(Color.parseColor(color))
+                            binding.hex.setText(color)
+                            colorDialog.dismiss()
+                        }
+                    }
+
+                    gridLayout.addView(colorButton)
                 }
             }
-
-            gridLayout.addView(colorButton)
-
         }
+
         colorDialog.show()
 
     }

@@ -13,6 +13,7 @@ import com.example.todoapp.Model.Task
 import com.example.todoapp.R
 import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.Utils.DatePicker.DateDialog
+import com.example.todoapp.Utils.Notification
 import com.example.todoapp.Utils.TimePicker.TimeDialog
 import com.example.todoapp.databinding.FragmentCreateTaskBinding
 import java.text.SimpleDateFormat
@@ -110,6 +111,7 @@ class CreateTaskFragment : Fragment() {
             val task = Task(0, userId, title, description, categoryId, date, false, false)
 
             viewModel.addTask(task)
+            Notification.notificationTask(requireContext(), task)
             findNavController().popBackStack()
         }
     }

@@ -68,11 +68,12 @@
         android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@id/guideline2"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
         app:layout_constraintHeight_percent="0.78"
         app:layout_constraintStart_toStartOf="@id/guideline1"
         app:layout_constraintTop_toBottomOf="@id/search"
         app:layout_constraintVertical_bias="1"
-        tools:listitem="@layout/category_item" />
+        tools:listitem="@layout/category_item_grid_layout" />
 
     <Button
         android:id="@+id/create_category"

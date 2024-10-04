@@ -15,6 +15,7 @@ interface CategoryDAO {
     @Query("SELECT * FROM Category WHERE userId = :userId")
     fun getAllCategory(userId: Long): LiveData<List<Category>>
 
+
     @Insert
     suspend fun insertCategory(category: Category)
 
