@@ -13,6 +13,7 @@ class TaskRepository(context: Context) {
     }
 
     fun getAllTask(userId: Long): LiveData<List<Task>> = taskDAO.getAllTask(userId)
+    fun getAllTaskCalendar(userId: Long): LiveData<List<Task>> = taskDAO.getAllTaskCalendar(userId)
     fun getAllDeleteTask(userId: Long): LiveData<List<Task>> = taskDAO.getAllDeleteTask(userId)
     suspend fun getAllRestore(userId: Long) = taskDAO.getAllRestore(userId)
     suspend fun doneTask(id: Long) = taskDAO.doneTask(id)

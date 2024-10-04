@@ -13,6 +13,9 @@ interface TaskDAO {
     @Query("SELECT * FROM Task WHERE isDelete = 0 AND userId = :userId")
     fun getAllTask(userId: Long): LiveData<List<Task>>
 
+    @Query("SELECT * FROM Task WHERE isDelete = 0 AND userId = :userId AND isDone = 0")
+    fun getAllTaskCalendar(userId: Long): LiveData<List<Task>>
+
     @Query("SELECT * FROM Task WHERE isDelete = 1 AND userId = :userId")
     fun getAllDeleteTask(userId: Long): LiveData<List<Task>>
 

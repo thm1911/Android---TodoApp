@@ -20,7 +20,7 @@ class CalendarViewModel(shareViewModel: ShareViewModel, context: Context) : View
         taskRepository = TaskRepository(context)
         categoryRepository = CategoryRepository(context)
         val userId = shareViewModel.userId
-        listTask = taskRepository.getAllTask(userId)
+        listTask = taskRepository.getAllTaskCalendar(userId)
         listCategory = categoryRepository.getAllCategory(userId)
     }
 

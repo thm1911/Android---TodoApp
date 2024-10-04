@@ -66,23 +66,33 @@ class ThemeFragment : Fragment() {
             .setView(colorDialogView)
             .create()
         val gridLayout = colorDialogView.findViewById<GridLayout>(R.id.gridColor)
-        listColor.forEach { color ->
-            val colorButton = View(requireContext()).apply {
-                layoutParams = GridLayout.LayoutParams().apply {
-                    width = 170
-                    height = 170
-                    setMargins(20, 20, 20, 20)
-                }
-                setBackgroundColor(Color.parseColor(color))
-                setOnClickListener {
-                    binding.theme.setBackgroundColor(Color.parseColor(color))
-                    binding.color.setBackgroundColor(Color.parseColor(color))
-                    theme = Color.parseColor(color)
-                    colorDialog.cancel()
+        gridLayout.removeAllViews()
+
+        colorDialogView.viewTreeObserver.addOnGlobalLayoutListener {
+            val widthView = gridLayout.width
+            val columnCount = 4
+            val cellWidth = widthView / columnCount
+
+            if (gridLayout.childCount == 0) {
+                listColor.forEach { color ->
+                    val colorButton = View(requireContext()).apply {
+                        layoutParams = GridLayout.LayoutParams().apply {
+                            width = cellWidth - 40
+                            height = cellWidth - 40
+                            setMargins(20, 20, 20, 20)
+                        }
+                        setBackgroundColor(Color.parseColor(color))
+                        setOnClickListener {
+                            binding.color.setBackgroundColor(Color.parseColor(color))
+                            colorDialog.dismiss()
+                        }
+                    }
+
+                    gridLayout.addView(colorButton)
                 }
             }
-            gridLayout.addView(colorButton)
         }
+
         colorDialog.show()
 
         binding.save.setOnClickListener {

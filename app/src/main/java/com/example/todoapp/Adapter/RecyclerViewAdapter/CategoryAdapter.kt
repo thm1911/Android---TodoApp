@@ -1,18 +1,14 @@
 package com.example.todoapp.Adapter.RecyclerViewAdapter
 
 import android.graphics.Color
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
 import android.widget.TextView
-import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import com.example.todoapp.Model.Category
 import com.example.todoapp.Model.CategoryAndTask
 import com.example.todoapp.R
-import kotlinx.coroutines.currentCoroutineContext
 
 class CategoryAdapter(private val onClick: (CategoryAndTask) -> Unit) :
     RecyclerView.Adapter<CategoryAdapter.CategoryViewHodel>() {
@@ -32,7 +28,7 @@ class CategoryAdapter(private val onClick: (CategoryAndTask) -> Unit) :
         viewType: Int
     ): CategoryViewHodel {
         val binding =
-            LayoutInflater.from(parent.context).inflate(R.layout.category_item, parent, false)
+            LayoutInflater.from(parent.context).inflate(R.layout.category_item_grid_layout, parent, false)
         return CategoryViewHodel(binding)
     }
 
@@ -59,7 +55,7 @@ class CategoryAdapter(private val onClick: (CategoryAndTask) -> Unit) :
 
     override fun getItemCount(): Int {
         if (showAll) return listCategoryAndTask.size
-        else return minOf(listCategoryAndTask.size, 3)
+        else return minOf(listCategoryAndTask.size, 2)
     }
 
     fun setData(category: List<CategoryAndTask>) {
