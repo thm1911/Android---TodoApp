@@ -28,8 +28,8 @@ class TaskDetailViewModel(context: Context) : ViewModel() {
         taskRepository.moveToTrash(id)
     }
 
-    fun restoreTask(id: Long) = viewModelScope.launch {
-        taskRepository.restoreTask(id)
+    fun doneTask(id: Long) = viewModelScope.launch {
+        taskRepository.doneTask(id)
     }
 
     fun delete(id: Long) = viewModelScope.launch {

@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView.LayoutManager
 import com.example.todoapp.Adapter.RecyclerViewAdapter.CategoryAdapter
@@ -73,7 +74,7 @@ class HomeFragment : Fragment() {
     private fun initCategoryList(bottom_nav: BottomNavigationView) {
         val categoryRecyclerView = binding.categoryRecyclerView
         categoryRecyclerView.layoutManager =
-            LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+            GridLayoutManager(requireContext(), 2)
 
         val adapter = CategoryAdapter { categoryAndTask ->
             val id = categoryAndTask.id

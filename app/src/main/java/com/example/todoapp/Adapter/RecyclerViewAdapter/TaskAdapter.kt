@@ -23,6 +23,8 @@ class TaskAdapter(private val onClick: (Task) -> Unit) :
         val title: TextView = view.findViewById(R.id.title)
         val time: TextView = view.findViewById(R.id.time)
         val date: TextView = view.findViewById(R.id.date)
+        val blur: View = view.findViewById(R.id.blur)
+        val done: View = view.findViewById(R.id.done)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TaskViewHolder {
@@ -50,6 +52,10 @@ class TaskAdapter(private val onClick: (Task) -> Unit) :
         holder.date.text = dateFormat.format(curTask.dueDate)
 
         holder.theme.setBackgroundColor(themeTask)
+        if(curTask.isDone){
+            holder.blur.visibility = View.VISIBLE
+            holder.done.visibility = View.VISIBLE
+        }
 
         holder.itemView.setOnClickListener {
             onClick(curTask)

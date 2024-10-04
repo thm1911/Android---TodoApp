@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string-array name="color_list">
-        <item>#FF000000</item>
+        <item>#E86C62</item>
+        <item>#4285F4</item>
+        <item>#73A954</item>
+        <item>#F09643</item>
+        <item>#1B1C1F</item>
+        <item>#E7A4CF</item>
+        <item>#F5D155</item>
+        <item>#3688F2</item>
+        <item>#9D53BB</item>
+        <item>#516171</item>
+        <item>#36C5F0</item>
         <item>#24A19C</item>
-        <item>#C4E2E4</item>
-        <item>#F2D5DA</item>
-        <item>#E1F1E8</item>
-        <item>#EA4335</item>
-        <item>#1877F2</item>
-        <item>#BEB3D2</item>
-        <item>#C0E9ED</item>
-        <item>#FAD9D5</item>
-        <item>#FFFFFFFF</item>
-        <item>#D1C0ED</item>
-        <item>#E1F7C7</item>
-        <item>#DBD9E4</item>
-        <item>#C3D3B7</item>
+        <item>#0ACF83</item>
+        <item>#FF486A</item>
+        <item>#FF4500</item>
         <item>#E5DB9C</item>
     </string-array>
 </resources>

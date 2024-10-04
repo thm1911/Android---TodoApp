@@ -14,6 +14,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.todoapp.Model.Task
 import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.Utils.DatePicker.DateDialog
+import com.example.todoapp.Utils.Notification
 import com.example.todoapp.Utils.TimePicker.TimeDialog
 import com.example.todoapp.databinding.FragmentTaskDetailBinding
 import java.util.Locale
@@ -40,6 +41,7 @@ class TaskDetailFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         _binding = FragmentTaskDetailBinding.inflate(inflater, container, false)
+
         return binding.root
     }
 
@@ -51,7 +53,7 @@ class TaskDetailFragment : Fragment() {
 
         if (mes == "categoryId") {
             init(shareViewModel.taskId, id)
-        } else if (mes == "taskId") {
+        } else if (mes == "taskId")  {
             shareViewModel.taskId = id
             init(id, 0L)
         }
@@ -75,6 +77,12 @@ class TaskDetailFragment : Fragment() {
         binding.back.setOnClickListener {
             findNavController().popBackStack()
         }
+
+        binding.done.setOnClickListener {
+            viewModel.doneTask(id)
+            findNavController().popBackStack()
+        }
+
 
         binding.delete.setOnClickListener {
             moveTotrash(id)
@@ -137,6 +145,7 @@ class TaskDetailFragment : Fragment() {
                 newDescription,
                 categoryId,
                 date.parse("$newDate $newTime"),
+                false,
                 false
             )
             val builder = AlertDialog.Builder(requireContext())
@@ -144,6 +153,7 @@ class TaskDetailFragment : Fragment() {
             builder.setMessage("Are you sure update Task?")
             builder.setNegativeButton("Ok") { dialog, which ->
                 viewModel.updateTask(task)
+                Notification.notificationTask(requireContext(), task)
                 findNavController().popBackStack()
             }
             builder.setPositiveButton("Cancel") { dialog, which ->

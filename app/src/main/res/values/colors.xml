@@ -8,5 +8,6 @@
     <color name="blue">#1877F2</color>
     <color name="bg">#E6E9E9EB</color>
     <color name="text">#312E2E</color>
+    <color name="input_text">#A9B0C5</color>
 
 </resources>
