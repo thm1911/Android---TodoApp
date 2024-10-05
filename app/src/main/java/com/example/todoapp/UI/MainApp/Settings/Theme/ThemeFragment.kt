@@ -85,6 +85,7 @@ class ThemeFragment : Fragment() {
                         setOnClickListener {
                             binding.color.setBackgroundColor(Color.parseColor(color))
                             binding.theme.setBackgroundColor(Color.parseColor(color))
+                            theme = Color.parseColor(color)
                             colorDialog.dismiss()
                         }
                     }
