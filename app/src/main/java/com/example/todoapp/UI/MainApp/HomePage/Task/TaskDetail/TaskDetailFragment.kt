@@ -12,9 +12,9 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todoapp.Model.Task
-import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.Utils.DatePicker.DateDialog
 import com.example.todoapp.Utils.Notification
+import com.example.todoapp.Utils.SharePref
 import com.example.todoapp.Utils.TimePicker.TimeDialog
 import com.example.todoapp.databinding.FragmentTaskDetailBinding
 import java.util.Locale
@@ -24,9 +24,8 @@ class TaskDetailFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: TaskDetailFragmentArgs by navArgs()
     private val viewModel: TaskDetailViewModel by viewModels() {
-        TaskDetailViewModel.TaskDetailViewModelFactory(requireContext())
+        TaskDetailViewModel.TaskDetailViewModelFactory(requireActivity().application)
     }
-    private val shareViewModel: ShareViewModel by activityViewModels()
 
     private var title = ""
     private var description = ""
@@ -52,9 +51,9 @@ class TaskDetailFragment : Fragment() {
         nameCategory = binding.category.text.toString()
 
         if (mes == "categoryId") {
-            init(shareViewModel.taskId, id)
+            init(SharePref.getTaskIdFromPreferences(requireActivity().application), id)
         } else if (mes == "taskId")  {
-            shareViewModel.taskId = id
+            SharePref.setTaskIdToPreferences(requireActivity().application, id)
             init(id, 0L)
         }
 
@@ -71,7 +70,7 @@ class TaskDetailFragment : Fragment() {
         }
 
         binding.update.setOnClickListener {
-            update(shareViewModel.taskId)
+            update(SharePref.getTaskIdFromPreferences(requireActivity().application))
         }
 
         binding.back.setOnClickListener {
@@ -140,7 +139,7 @@ class TaskDetailFragment : Fragment() {
             val date = SimpleDateFormat("EE, dd MMM yyyy HH:mm", Locale.getDefault())
             val task = Task(
                 taskId,
-                shareViewModel.userId,
+                SharePref.getUserIdFromPreferences(requireActivity().application),
                 newTitle,
                 newDescription,
                 categoryId,

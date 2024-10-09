@@ -8,15 +8,13 @@ import android.view.ViewGroup
 import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.databinding.FragmentAccountBinding
 
 class AccountFragment : Fragment() {
     private var _binding: FragmentAccountBinding? = null
     private val binding get() = _binding!!
-    private val shareViewModel: ShareViewModel by activityViewModels()
     private val viewModel: AccountViewModel by viewModels {
-        AccountViewModel.AccountViewModelFactory(shareViewModel, requireContext())
+        AccountViewModel.AccountViewModelFactory(requireActivity().application)
     }
 
     override fun onCreateView(

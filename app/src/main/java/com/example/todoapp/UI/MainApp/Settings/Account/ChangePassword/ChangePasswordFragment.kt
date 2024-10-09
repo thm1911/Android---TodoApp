@@ -10,15 +10,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todoapp.R
-import com.example.todoapp.UI.ShareViewModel
+import com.example.todoapp.Utils.SharePref
 import com.example.todoapp.databinding.FragmentChangePasswordBinding
 
 class ChangePasswordFragment : Fragment() {
     private var _binding: FragmentChangePasswordBinding? = null
     private val binding get() = _binding!!
-    private val shareViewModel: ShareViewModel by activityViewModels()
     private val viewModel: ChangePasswordViewModel by viewModels() {
-        ChangePasswordViewModel.ChangePasswordViewModelFactory(shareViewModel, requireContext())
+        ChangePasswordViewModel.ChangePasswordViewModelFactory(requireActivity().application)
     }
 
     override fun onCreateView(
@@ -65,7 +64,7 @@ class ChangePasswordFragment : Fragment() {
             builder.setTitle("Change Password")
             builder.setMessage("Are you sure change password?")
             builder.setPositiveButton("OK") { dialog, which ->
-                viewModel.updatePassword(shareViewModel.userId, newPass)
+                viewModel.updatePassword(SharePref.getUserIdFromPreferences(requireActivity().application), newPass)
                 findNavController().popBackStack()
             }
 

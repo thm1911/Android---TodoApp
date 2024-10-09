@@ -19,8 +19,8 @@ import com.example.todoapp.Adapter.RecyclerViewAdapter.TaskAdapter
 import com.example.todoapp.Model.Category
 import com.example.todoapp.R
 import com.example.todoapp.UI.MainApp.HomePage.Category.CreateCategory.BottomCreateCategoryFragment
-import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.UI.SpacingItem
+import com.example.todoapp.Utils.SharePref
 import com.example.todoapp.databinding.FragmentTaskHomeBinding
 
 class TaskHomeFragment : Fragment() {
@@ -30,11 +30,9 @@ class TaskHomeFragment : Fragment() {
     private lateinit var linearLayoutManager: LinearLayoutManager
     private lateinit var gridLayoutManager: GridLayoutManager
     private var isLinearLayout: Boolean = true
-
     private val viewModel: TaskHomeViewModel by viewModels {
-        TaskHomeViewModel.TaskHomeViewModelFactory(shareViewModel, requireContext())
+        TaskHomeViewModel.TaskHomeViewModelFactory(requireActivity().application)
     }
-    private val shareViewModel: ShareViewModel by activityViewModels()
     private val args: TaskHomeFragmentArgs by navArgs()
     private val custom = listOf("No Sort", "Sort Date A-Z", "Sort Date Z-A")
 
@@ -97,7 +95,7 @@ class TaskHomeFragment : Fragment() {
         } else if (mes == "category") {
             update(id)
             var count: Int = 0
-            viewModel.listTask = viewModel.getTaskByCategory(id, shareViewModel.userId)
+            viewModel.listTask = viewModel.getTaskByCategory(id, SharePref.getUserIdFromPreferences(requireActivity().application))
             viewModel.listTask.observe(viewLifecycleOwner) { task ->
                 count = task.size
                 adapter.setData(task)
@@ -108,18 +106,16 @@ class TaskHomeFragment : Fragment() {
             }
         }
 
-        viewModel.getTheme(shareViewModel.userId) { theme ->
+        viewModel.getTheme(SharePref.getUserIdFromPreferences(requireActivity().application)) { theme ->
             adapter.setTheme(theme)
         }
 
         binding.layout.setOnClickListener {
             isLinearLayout = !isLinearLayout
             if (isLinearLayout) {
-                shareViewModel.isLinearLayout = true
                 recyclerView.layoutManager = linearLayoutManager
                 binding.layout.setBackgroundResource(R.drawable.ic_linear_layout)
             } else {
-                shareViewModel.isLinearLayout = false
                 recyclerView.layoutManager = gridLayoutManager
                 binding.layout.setBackgroundResource(R.drawable.ic_grid_layout)
             }
@@ -159,7 +155,7 @@ class TaskHomeFragment : Fragment() {
                     name = category.name
                     color = category.color
                 }
-                viewModel.delete(Category(args.categoryId, shareViewModel.userId, name, color))
+                viewModel.delete(Category(args.categoryId, SharePref.getUserIdFromPreferences(requireActivity().application), name, color))
                 findNavController().popBackStack()
             } else dialog.dismiss()
         }

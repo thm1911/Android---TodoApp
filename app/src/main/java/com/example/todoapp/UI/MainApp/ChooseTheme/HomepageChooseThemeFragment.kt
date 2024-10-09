@@ -15,7 +15,6 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todoapp.R
-import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.databinding.FragmentHomepageChooseThemeBinding
 
 class HomepageChooseThemeFragment : Fragment() {
@@ -24,9 +23,8 @@ class HomepageChooseThemeFragment : Fragment() {
     private var listButton: List<RadioButton> = listOf()
     private val args: HomepageChooseThemeFragmentArgs by navArgs()
     private val viewModel: HomepageChooseThemeViewModel by viewModels {
-        HomepageChooseThemeViewModel.HomepageChooseThemeViewModelFactory(requireContext())
+        HomepageChooseThemeViewModel.HomepageChooseThemeViewModelFactory(requireActivity().application)
     }
-    private val shareViewModel: ShareViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -13,16 +13,14 @@ import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.todoapp.R
-import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.databinding.FragmentThemeBinding
 
 class ThemeFragment : Fragment() {
     private var _binding: FragmentThemeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ThemeViewModel by viewModels(){
-        ThemeViewModel.ThemeViewModelFactory(shareViewModel, requireContext())
+        ThemeViewModel.ThemeViewModelFactory(requireActivity().application)
     }
-    private val shareViewModel: ShareViewModel by activityViewModels()
     private var username = ""
 
     override fun onCreateView(

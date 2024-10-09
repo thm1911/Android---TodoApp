@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_stepFragment_to_createAccountFragment"
             app:destination="@id/createAccountFragment" />
+        <action
+            android:id="@+id/action_stepFragment_to_mainAppFragment"
+            app:destination="@id/mainAppFragment" />
     </fragment>
     <fragment
         android:id="@+id/createAccountFragment"

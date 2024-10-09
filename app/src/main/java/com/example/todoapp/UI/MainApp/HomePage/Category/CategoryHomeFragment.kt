@@ -14,7 +14,6 @@ import androidx.recyclerview.widget.GridLayoutManager
 import com.example.todoapp.Adapter.RecyclerViewAdapter.CategoryAdapter
 import com.example.todoapp.R
 import com.example.todoapp.UI.MainApp.HomePage.Category.CreateCategory.BottomCreateCategoryFragment
-import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.UI.SpacingItem
 import com.example.todoapp.databinding.FragmentCategoryHomeBinding
 
@@ -22,9 +21,8 @@ class CategoryHomeFragment : Fragment() {
     private var _binding: FragmentCategoryHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CategoryHomeViewModel by viewModels {
-        CategoryHomeViewModel.CategoryHomeViewModelFactory(shareViewModel, requireContext())
+        CategoryHomeViewModel.CategoryHomeViewModelFactory(requireActivity().application)
     }
-    private val shareViewModel: ShareViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
