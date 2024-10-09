@@ -21,7 +21,7 @@ class TaskDetailTrashFragment : Fragment() {
     private var _binding: FragmentTaskDetailTrashBinding? = null
     private val binding get() = _binding!!
     private val viewModel: TaskDetailTrashViewModel by viewModels() {
-        TaskDetailTrashViewModel.TaskDetailTrashViewModelFactory(requireContext())
+        TaskDetailTrashViewModel.TaskDetailTrashViewModelFactory(requireActivity().application)
     }
     private val args: TaskDetailTrashFragmentArgs by navArgs()
 

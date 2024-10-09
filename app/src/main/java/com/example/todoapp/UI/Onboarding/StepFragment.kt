@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.example.todoapp.Adapter.ViewPagerAdapter.FragmentOnboardingAdapter
+import com.example.todoapp.R
+import com.example.todoapp.Utils.SharePref
 import com.example.todoapp.databinding.FragmentStepBinding
 import com.google.android.material.tabs.TabLayoutMediator
 
@@ -51,13 +54,21 @@ class StepFragment : Fragment() {
         })
 
         binding.skip.setOnClickListener {
-            findNavController().navigate(StepFragmentDirections.actionStepFragmentToCreateAccountFragment())
+            checkSignInState()
         }
 
         binding.continueButton.setOnClickListener {
             findNavController().navigate(StepFragmentDirections.actionStepFragmentToCreateAccountFragment())
         }
 
+    }
+
+    private fun checkSignInState(){
+        if (SharePref.getIsUserSignIn(requireActivity().application)) {
+            findNavController().navigate(StepFragmentDirections.actionStepFragmentToMainAppFragment())
+        } else {
+            findNavController().navigate(StepFragmentDirections.actionStepFragmentToCreateAccountFragment())
+        }
     }
 
     override fun onDestroyView() {

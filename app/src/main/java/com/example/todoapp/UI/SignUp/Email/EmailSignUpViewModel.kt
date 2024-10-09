@@ -1,5 +1,6 @@
 package com.example.todoapp.UI.SignUp.Email
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -10,11 +11,11 @@ import com.example.todoapp.Database.User.UserRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class EmailSignUpViewModel(context: Context) : ViewModel() {
+class EmailSignUpViewModel(application: Application) : ViewModel() {
     private val userRepository: UserRepository
 
     init {
-        userRepository = UserRepository(context)
+        userRepository = UserRepository(application)
     }
 
     fun isEmailExist(email: String, callback: (Boolean) -> Unit) = viewModelScope.launch {
@@ -22,11 +23,11 @@ class EmailSignUpViewModel(context: Context) : ViewModel() {
         callback(exist)
     }
 
-    class EmailSignUpViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+    class EmailSignUpViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(EmailSignUpViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return EmailSignUpViewModel(context) as T
+                return EmailSignUpViewModel(application) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

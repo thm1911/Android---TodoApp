@@ -1,5 +1,6 @@
 package com.example.todoapp.Database.Category
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.room.RoomDatabase
@@ -7,11 +8,11 @@ import com.example.todoapp.Database.TodoDatabase
 import com.example.todoapp.Model.Category
 import com.example.todoapp.Model.CategoryAndTask
 
-class CategoryRepository(context: Context) {
+class CategoryRepository(application: Application) {
     private val categoryDAO: CategoryDAO
 
     init {
-        categoryDAO = TodoDatabase.getInstance(context).categoryDAO()
+        categoryDAO = TodoDatabase.getInstance(application).categoryDAO()
     }
 
     fun getAllCategory(userId: Long): LiveData<List<Category>> = categoryDAO.getAllCategory(userId)

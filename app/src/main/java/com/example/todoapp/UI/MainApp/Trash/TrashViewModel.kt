@@ -1,5 +1,6 @@
 package com.example.todoapp.UI.MainApp.Trash
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -8,18 +9,18 @@ import androidx.lifecycle.viewModelScope
 import com.example.todoapp.Database.Task.TaskRepository
 import com.example.todoapp.Database.User.UserRepository
 import com.example.todoapp.Model.Task
-import com.example.todoapp.UI.ShareViewModel
+import com.example.todoapp.Utils.SharePref
 import kotlinx.coroutines.launch
 
-class TrashViewModel(shareViewModel: ShareViewModel, context: Context) : ViewModel() {
+class TrashViewModel(application: Application) : ViewModel() {
     private val taskRepository: TaskRepository
     private val userRepository: UserRepository
     val listDeleteTask: LiveData<List<Task>>
-    val userId = shareViewModel.userId
+    val userId = SharePref.getUserIdFromPreferences(application)
 
     init {
-        taskRepository = TaskRepository(context)
-        userRepository = UserRepository(context)
+        taskRepository = TaskRepository(application)
+        userRepository = UserRepository(application)
         listDeleteTask = taskRepository.getAllDeleteTask(userId)
     }
 
@@ -33,14 +34,13 @@ class TrashViewModel(shareViewModel: ShareViewModel, context: Context) : ViewMod
     }
 
     class TrashViewModelFactory(
-        private val shareViewModel: ShareViewModel,
-        private val context: Context
+        private val application: Application
     ) : ViewModelProvider
     .Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(TrashViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return TrashViewModel(shareViewModel, context) as T
+                return TrashViewModel(application) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

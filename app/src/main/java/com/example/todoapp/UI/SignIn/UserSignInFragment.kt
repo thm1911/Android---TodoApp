@@ -1,5 +1,6 @@
 package com.example.todoapp.UI.SignIn
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -11,16 +12,15 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2.OnPageChangeCallback
 import com.example.todoapp.R
-import com.example.todoapp.UI.ShareViewModel
+import com.example.todoapp.Utils.SharePref
 import com.example.todoapp.databinding.FragmentUserSignInBinding
 
 class UserSignInFragment : Fragment() {
     private var _binding: FragmentUserSignInBinding? = null
     private val binding get() = _binding!!
     private val viewModel: UserSignInViewModel by viewModels {
-        UserSignInViewModel.UserSignInViewModelFactory(requireContext())
+        UserSignInViewModel.UserSignInViewModelFactory(requireActivity().application)
     }
-    private val shareViewModel: ShareViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,8 @@ class UserSignInFragment : Fragment() {
             check { res ->
                 if (res){
                     viewModel.getId(binding.username.text.toString()){id ->
-                        shareViewModel.userId = id
+                        SharePref.setUserIdToPreferences(requireActivity().application, id)
+                        SharePref.setUserLoginState(requireActivity().application, id, true)
                     }
                     findNavController().navigate(
                         UserSignInFragmentDirections.actionUserSignInFragmentToHomepageChooseThemeFragment(binding.username.text.toString()),

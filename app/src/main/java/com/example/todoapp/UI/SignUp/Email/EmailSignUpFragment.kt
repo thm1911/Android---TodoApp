@@ -14,7 +14,7 @@ class EmailSignUpFragment : Fragment() {
     private var _binding: FragmentEmailSignUpBinding? = null
     private val binding get() = _binding!!
     private val viewModel: EmailSignUpViewModel by viewModels {
-        EmailSignUpViewModel.EmailSignUpViewModelFactory(requireContext())
+        EmailSignUpViewModel.EmailSignUpViewModelFactory(requireActivity().application)
     }
 
     override fun onCreateView(

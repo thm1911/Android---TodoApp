@@ -1,16 +1,17 @@
 package com.example.todoapp.Database.User
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.todoapp.Database.TodoDatabase
 import com.example.todoapp.Model.User
 
-class UserRepository(context: Context) {
+class UserRepository(application: Application) {
     private val userDAO: UserDAO
 
 
     init {
-        userDAO = TodoDatabase.getInstance(context).userDAO()
+        userDAO = TodoDatabase.getInstance(application).userDAO()
     }
 
     suspend fun insertUser(user: User) = userDAO.insertUser(user)
