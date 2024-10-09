@@ -11,16 +11,14 @@ import androidx.navigation.NavOptions
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.example.todoapp.R
-import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.databinding.FragmentSettingsBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class SettingsFragment : Fragment() {
     private var _binding: FragmentSettingsBinding? = null
     private val binding get() = _binding!!
-    private val shareViewModel: ShareViewModel by activityViewModels()
     private val viewModel: SettingsViewModel by viewModels() {
-        SettingsViewModel.SettingsViewModelFactory(shareViewModel, requireContext())
+        SettingsViewModel.SettingsViewModelFactory(requireActivity().application)
     }
 
     override fun onCreateView(

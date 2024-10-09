@@ -1,15 +1,16 @@
 package com.example.todoapp.Database.Task
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
 import com.example.todoapp.Database.TodoDatabase
 import com.example.todoapp.Model.Task
 
-class TaskRepository(context: Context) {
+class TaskRepository(application: Application) {
     private val taskDAO: TaskDAO
 
     init {
-        taskDAO = TodoDatabase.getInstance(context).taskDAO()
+        taskDAO = TodoDatabase.getInstance(application).taskDAO()
     }
 
     fun getAllTask(userId: Long): LiveData<List<Task>> = taskDAO.getAllTask(userId)

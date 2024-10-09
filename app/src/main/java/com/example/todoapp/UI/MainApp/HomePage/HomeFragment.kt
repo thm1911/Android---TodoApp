@@ -1,5 +1,6 @@
 package com.example.todoapp.UI.MainApp.HomePage
 
+import android.content.Context
 import android.os.Bundle
 import android.util.Log
 import androidx.fragment.app.Fragment
@@ -16,8 +17,8 @@ import com.example.todoapp.Adapter.RecyclerViewAdapter.CategoryAdapter
 import com.example.todoapp.Adapter.RecyclerViewAdapter.TaskAdapter
 import com.example.todoapp.R
 import com.example.todoapp.UI.MainApp.HomePage.HomeFragmentDirections
-import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.UI.SpacingItem
+import com.example.todoapp.Utils.SharePref
 import com.example.todoapp.databinding.FragmentHomeBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
@@ -25,9 +26,8 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding!!
     private val viewModel: HomeViewModel by viewModels {
-        HomeViewModel.HomeViewModelFactory(shareViewModel, requireContext())
+        HomeViewModel.HomeViewModelFactory(requireActivity().application)
     }
-    private val shareViewModel: ShareViewModel by activityViewModels()
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -120,7 +120,7 @@ class HomeFragment : Fragment() {
             binding.task.setText(String.format("Task(%d)", task.size))
         }
 
-        viewModel.getTheme(shareViewModel.userId) { theme ->
+        viewModel.getTheme(SharePref.getUserIdFromPreferences(requireActivity().application)) { theme ->
             adapter.setTheme(theme)
         }
     }

@@ -15,7 +15,6 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoapp.Adapter.RecyclerViewAdapter.CategoryAdapter
 import com.example.todoapp.R
 import com.example.todoapp.UI.MainApp.HomePage.Category.CreateCategory.BottomCreateCategoryFragment
-import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.UI.SpacingItem
 import com.example.todoapp.databinding.FragmentChooseCategoryBinding
 
@@ -23,9 +22,8 @@ class ChooseCategoryFragment : Fragment() {
     private var _binding: FragmentChooseCategoryBinding? = null
     private val binding get() = _binding!!
     private val viewModel: ChooseCategoryViewModel by viewModels {
-        ChooseCategoryViewModel.ChooseCategoryViewModelFactory(shareViewModel, requireContext())
+        ChooseCategoryViewModel.ChooseCategoryViewModelFactory(requireActivity().application)
     }
-    private val shareViewModel: ShareViewModel by activityViewModels()
     private val args: ChooseCategoryFragmentArgs by navArgs()
 
     override fun onCreateView(

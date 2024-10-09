@@ -1,5 +1,6 @@
 package com.example.todoapp.UI.MainApp.HomePage.Category.ChooseCategory
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -7,27 +8,26 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.todoapp.Database.Category.CategoryRepository
 import com.example.todoapp.Model.Category
 import com.example.todoapp.Model.CategoryAndTask
-import com.example.todoapp.UI.ShareViewModel
+import com.example.todoapp.Utils.SharePref
 
-class ChooseCategoryViewModel(shareViewModel: ShareViewModel, context: Context) : ViewModel() {
+class ChooseCategoryViewModel(application: Application) : ViewModel() {
     private val categoryRepository: CategoryRepository
     val listCategoryAndTask: LiveData<List<CategoryAndTask>>
 
     init {
-        categoryRepository = CategoryRepository(context)
-        val userId = shareViewModel.userId
+        categoryRepository = CategoryRepository(application)
+        val userId = SharePref.getUserIdFromPreferences(application)
         listCategoryAndTask = categoryRepository.getAllCategoryAndTask(userId)
     }
 
     class ChooseCategoryViewModelFactory(
-        private val shareViewModel: ShareViewModel,
-        private val context: Context
+        private val application: Application
     ) : ViewModelProvider
     .Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(ChooseCategoryViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return ChooseCategoryViewModel(shareViewModel, context) as T
+                return ChooseCategoryViewModel(application) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

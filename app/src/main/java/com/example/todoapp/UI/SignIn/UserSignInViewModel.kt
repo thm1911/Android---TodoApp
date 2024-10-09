@@ -1,5 +1,6 @@
 package com.example.todoapp.UI.SignIn
 
+import android.app.Application
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
@@ -8,11 +9,11 @@ import com.example.todoapp.Database.User.UserRepository
 import kotlinx.coroutines.isActive
 import kotlinx.coroutines.launch
 
-class UserSignInViewModel(context: Context) : ViewModel() {
+class UserSignInViewModel(application: Application) : ViewModel() {
     private val userRepository: UserRepository
 
     init {
-        userRepository = UserRepository(context)
+        userRepository = UserRepository(application)
     }
 
     fun checkUser(username: String, password: String, callback: (Boolean) -> Unit) =
@@ -26,11 +27,11 @@ class UserSignInViewModel(context: Context) : ViewModel() {
         callback(id)
     }
 
-    class UserSignInViewModelFactory(private val context: Context) : ViewModelProvider.Factory {
+    class UserSignInViewModelFactory(private val application: Application) : ViewModelProvider.Factory {
         override fun <T : ViewModel> create(modelClass: Class<T>): T {
             if (modelClass.isAssignableFrom(UserSignInViewModel::class.java)) {
                 @Suppress("UNCHECKED_CAST")
-                return UserSignInViewModel(context) as T
+                return UserSignInViewModel(application) as T
             }
             throw IllegalArgumentException("Unknown ViewModel class")
         }

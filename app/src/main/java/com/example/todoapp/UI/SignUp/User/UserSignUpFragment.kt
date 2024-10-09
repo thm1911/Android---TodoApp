@@ -1,5 +1,6 @@
 package com.example.todoapp.UI.SignUp.User
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -13,7 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.example.todoapp.Model.User
 import com.example.todoapp.R
-import com.example.todoapp.UI.ShareViewModel
+import com.example.todoapp.Utils.SharePref
 import com.example.todoapp.databinding.FragmentUserSignUpBinding
 
 class UserSignUpFragment : Fragment() {
@@ -21,9 +22,8 @@ class UserSignUpFragment : Fragment() {
     private val binding get() = _binding!!
     private val args: UserSignUpFragmentArgs by navArgs()
     private val viewModel: UserSignUpViewModel by viewModels {
-        UserSignUpViewModel.UserSignUpViewModelFactory(requireContext())
+        UserSignUpViewModel.UserSignUpViewModelFactory(requireActivity().application)
     }
-    private val shareViewModel: ShareViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -51,9 +51,9 @@ class UserSignUpFragment : Fragment() {
                         0
                     )
                     viewModel.insertUser(user){id ->
-                        shareViewModel.userId = id
+                        SharePref.setUserIdToPreferences(requireActivity().application, id)
+                        SharePref.setUserLoginState(requireActivity().application, id, true)
                     }
-                    shareViewModel.userId = user.id
                     findNavController().navigate(
                         UserSignUpFragmentDirections.actionUserSignUpFragmentToHomepageChooseThemeFragment2(
                             binding.username.text.toString()

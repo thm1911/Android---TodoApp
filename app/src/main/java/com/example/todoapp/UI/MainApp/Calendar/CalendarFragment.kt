@@ -13,7 +13,6 @@ import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.todoapp.Adapter.RecyclerViewAdapter.CalendarAdapter
 import com.example.todoapp.R
-import com.example.todoapp.UI.ShareViewModel
 import com.example.todoapp.UI.SpacingItem
 import com.example.todoapp.databinding.FragmentCalendarBinding
 import java.text.SimpleDateFormat
@@ -23,9 +22,8 @@ class CalendarFragment : Fragment() {
     private var _binding: FragmentCalendarBinding? = null
     private val binding get() = _binding!!
     private val viewModel: CalendarViewModel by viewModels {
-        CalendarViewModel.CalendarViewModelFactory(shareViewModel, requireContext())
+        CalendarViewModel.CalendarViewModelFactory(requireActivity().application)
     }
-    private val shareViewModel: ShareViewModel by activityViewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
